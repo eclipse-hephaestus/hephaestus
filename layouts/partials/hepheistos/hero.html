@@ -1,0 +1,61 @@
+<!--
+ ********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************
+-->
+{{ $section := site.GetPage "/home/hero" }}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Eclipse SDV Tooling" }}{{ else }}Eclipse SDV Tooling{{ end }}</p>
+      <h1>{{ with $section }}{{ .Params.title | default "Open tooling for software-defined vehicle development" }}{{ else }}Open tooling for software-defined vehicle development{{ end }}</h1>
+      <p class="lead">{{ with $section }}{{ .Params.lead | default "Build, integrate, validate, and evolve vehicle software with a vendor-neutral Eclipse project designed for modern SDV workflows." }}{{ else }}Build, integrate, validate, and evolve vehicle software with a vendor-neutral Eclipse project designed for modern SDV workflows.{{ end }}</p>
+      <div class="button-row">
+        {{ with $section }}
+          {{ with .Params.buttons }}
+            {{ range . }}
+              {{ $href := .url | default "#" }}
+              {{ if not (or (hasPrefix $href "http://") (hasPrefix $href "https://") (hasPrefix $href "mailto:")) }}
+                {{ $href = $href | relURL }}
+              {{ end }}
+              <a class="btn {{ .class | default "btn-primary" }}" href="{{ $href }}">{{ .label | default "Learn more" }}</a>
+            {{ end }}
+          {{ else }}
+            <a class="btn btn-primary" href="{{ "getting-started/" | relURL }}">Get Started</a>
+            <a class="btn btn-secondary" href="{{ "docs/" | relURL }}">Read the Docs</a>
+          {{ end }}
+        {{ else }}
+          <a class="btn btn-primary" href="{{ "getting-started/" | relURL }}">Get Started</a>
+          <a class="btn btn-secondary" href="{{ "docs/" | relURL }}">Read the Docs</a>
+        {{ end }}
+      </div>
+      {{ with $section }}
+        {{ with .Params.metrics }}
+          <div class="hero-metrics" aria-label="Project focus areas">
+            {{ range . }}
+              <div><strong>{{ .value | default "" }}</strong><span>{{ .label | default "" }}</span></div>
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ else }}
+        <div class="hero-metrics" aria-label="Project focus areas">
+          <div><strong>4</strong><span>tooling areas</span></div>
+          <div><strong>100%</strong><span>open collaboration</span></div>
+          <div><strong>SDV</strong><span>engineering focus</span></div>
+        </div>
+      {{ end }}
+    </div>
+    <div class="hero-visual-card">
+      <img src="{{ with $section }}{{ .Params.image | default "images/hepheistos/hero-sdv-tooling.svg" | relURL }}{{ else }}{{ "images/hepheistos/hero-sdv-tooling.svg" | relURL }}{{ end }}" alt="{{ with $section }}{{ .Params.image_alt | default "SDV tooling workflow illustration" }}{{ else }}SDV tooling workflow illustration{{ end }}">
+    </div>
+  </div>
+</section>

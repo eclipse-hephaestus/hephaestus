@@ -1,0 +1,80 @@
+<div id="footer-js">
+  <!-- Placed at the end of the document so the pages load faster -->
+  {{- $default_js := "https://www.eclipse.org/public/js/neptune/main.js" -}}
+  {{- $site_scripts := .Site.Params.scripts -}}
+  {{- $page_scripts := .Page.Params.scripts -}}
+
+  {{- if $site_scripts -}}
+    {{- range $site_scripts -}}
+      {{- $src := .url | relURL -}}
+      {{- if .cache -}}{{- $src = printf "%s?v=%d" $src now.Unix -}}{{- end -}}
+      {{- $stag := printf `<script src="%s"` $src -}}
+      {{- with .type -}}{{- $stag = printf `%s type="%s"` $stag . -}}{{- end -}}
+      {{- if .defer -}}{{- $stag = printf "%s defer" $stag -}}{{- end -}}
+      {{- with .integrity -}}{{- $stag = printf `%s integrity="%s"` $stag . -}}{{- end -}}
+      {{- (printf "%s></script>" $stag) | safeHTML -}}
+    {{- end }}
+  {{- else if .Site.Params.js -}}
+    {{- warnf "Param 'Params.js' is deprecated. Use [[Params.scripts]] array instead. See https://webdev.eclipse.org/docs/hugo/" -}}
+    <script src="{{ .Site.Params.js | relURL }}?v={{ now.Unix }}"></script>
+    {{- with .Site.Params.hugo_js }}
+    {{- warnf "Param 'Params.hugo_js' is deprecated. Use [[Params.scripts]] array instead. See https://webdev.eclipse.org/docs/hugo/" -}}
+    <script src="{{ . | relURL }}"></script>
+    {{- end }}
+  {{- else -}}
+    <script src="{{ $default_js | relURL }}?v={{ now.Unix }}"></script>
+  {{- end }}
+
+  {{- range $page_scripts -}}
+    {{- $src := .url | relURL -}}
+    {{- if .cache -}}{{- $src = printf "%s?v=%d" $src now.Unix -}}{{- end -}}
+    {{- $stag := printf `<script src="%s"` $src -}}
+    {{- with .type -}}{{- $stag = printf `%s type="%s"` $stag . -}}{{- end -}}
+    {{- if .defer -}}{{- $stag = printf "%s defer" $stag -}}{{- end -}}
+    {{- with .integrity -}}{{- $stag = printf `%s integrity="%s"` $stag . -}}{{- end -}}
+    {{- (printf "%s></script>" $stag) | safeHTML -}}
+  {{- end }}
+
+  <!-- Read in mustache templates registered in page scratch -->
+  {{ range $key, $value := (.Page.Scratch.Get "mustache-templates") }}
+  <script id="{{ $key }}" type="text/html">
+  {{ readFile $value | safeHTML}}
+  </script>
+  {{ end }}
+
+  <!-- Initialize any newsroom components on the page -->
+  {{ if (.Site.Params.newsroom_esm | default false) -}}
+  <script type="module">
+    import $ from "jquery";
+    {{ range (.Page.Scratch.Get "events-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "filteredEvents"
+      });
+    {{ end }}
+    {{ range (.Page.Scratch.Get "news-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "newsItems"
+      });
+    {{ end }}
+  </script>
+  {{- else -}}
+  <script>
+  (function($, document) {
+    {{ range (.Page.Scratch.Get "events-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "filteredEvents"
+      });
+    {{ end }}
+    {{ range (.Page.Scratch.Get "news-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "newsItems"
+      });
+    {{ end }}
+  })(jQuery, document);
+  </script>
+  {{- end }}
+
+  {{ if eq (.Page.Scratch.Get "is_using_twitter") "true" }}
+    <script src="https://platform.twitter.com/widgets.js" async></script>
+  {{ end }}
+</div>

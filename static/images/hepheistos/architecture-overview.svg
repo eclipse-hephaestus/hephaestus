@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-label="Architecture overview">
+  <defs>
+    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f7941e"/><stop offset="1" stop-color="#00b5ad"/></linearGradient>
+  </defs>
+  <rect width="720" height="520" rx="34" fill="#0b1726"/>
+  <g fill="#fff" opacity=".08">
+    <circle cx="102" cy="86" r="44"/><circle cx="618" cy="430" r="76"/><circle cx="620" cy="92" r="28"/>
+  </g>
+  <rect x="250" y="190" width="220" height="132" rx="28" fill="url(#a)"/>
+  <text x="287" y="246" fill="#08111f" font-family="Inter,Arial" font-size="25" font-weight="800">Hepheistos</text>
+  <text x="298" y="280" fill="#08111f" font-family="Inter,Arial" font-size="17">integration layer</text>
+  <g stroke="#00b5ad" stroke-width="4" opacity=".78">
+    <line x1="250" y1="256" x2="150" y2="126"/><line x1="250" y1="256" x2="150" y2="256"/><line x1="250" y1="256" x2="150" y2="386"/>
+    <line x1="470" y1="256" x2="570" y2="126"/><line x1="470" y1="256" x2="570" y2="256"/><line x1="470" y1="256" x2="570" y2="386"/>
+  </g>
+  <g font-family="Inter,Arial" font-weight="700" font-size="17" fill="#fff">
+    <rect x="64" y="82" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="103" y="127">Requirements</text>
+    <rect x="64" y="218" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="112" y="263">Modeling</text>
+    <rect x="64" y="354" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="102" y="399">Development</text>
+    <rect x="484" y="82" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="548" y="127">CI</text>
+    <rect x="484" y="218" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="526" y="263">Validation</text>
+    <rect x="484" y="354" width="172" height="76" rx="18" fill="#fff" opacity=".12"/><text x="532" y="399">Release</text>
+  </g>
+</svg>

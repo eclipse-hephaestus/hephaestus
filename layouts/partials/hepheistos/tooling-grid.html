@@ -1,0 +1,77 @@
+<!--
+ ********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************
+-->
+{{ $section := site.GetPage "/home/tooling-grid" }}
+<section class="section section-light">
+  <div class="container center intro">
+    <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Tooling areas" }}{{ else }}Tooling areas{{ end }}</p>
+    <h2>{{ with $section }}{{ .Params.title | default "Clear entry points for adopters and contributors" }}{{ else }}Clear entry points for adopters and contributors{{ end }}</h2>
+    <p class="lead muted">{{ with $section }}{{ .Params.lead | default "Organize the project around developer experience, integration, validation, and examples." }}{{ else }}Organize the project around developer experience, integration, validation, and examples.{{ end }}</p>
+  </div>
+  <div class="container card-grid four">
+    {{ with $section }}
+      {{ with .Params.tiles }}
+        {{ range . }}
+          <article class="tile">
+            <span class="tile-icon">{{ .icon | default "" }}</span>
+            <h3>{{ .title | default "" }}</h3>
+            <p>{{ .text | default "" }}</p>
+          </article>
+        {{ end }}
+      {{ else }}
+        <article class="tile">
+          <span class="tile-icon">$</span>
+          <h3>Developer Experience</h3>
+          <p>Templates, CLI workflows, local setup, and repeatable development environments.</p>
+        </article>
+        <article class="tile">
+          <span class="tile-icon">+</span>
+          <h3>Integration</h3>
+          <p>Patterns for connecting SDV tools, services, repositories, and automation.</p>
+        </article>
+        <article class="tile">
+          <span class="tile-icon">OK</span>
+          <h3>Validation</h3>
+          <p>Workflows for quality gates, reproducibility, and engineering confidence.</p>
+        </article>
+        <article class="tile">
+          <span class="tile-icon">[]</span>
+          <h3>Examples</h3>
+          <p>Reference projects and scenarios that help new users understand the toolchain.</p>
+        </article>
+      {{ end }}
+    {{ else }}
+      <article class="tile">
+        <span class="tile-icon">$</span>
+        <h3>Developer Experience</h3>
+        <p>Templates, CLI workflows, local setup, and repeatable development environments.</p>
+      </article>
+      <article class="tile">
+        <span class="tile-icon">+</span>
+        <h3>Integration</h3>
+        <p>Patterns for connecting SDV tools, services, repositories, and automation.</p>
+      </article>
+      <article class="tile">
+        <span class="tile-icon">OK</span>
+        <h3>Validation</h3>
+        <p>Workflows for quality gates, reproducibility, and engineering confidence.</p>
+      </article>
+      <article class="tile">
+        <span class="tile-icon">[]</span>
+        <h3>Examples</h3>
+        <p>Reference projects and scenarios that help new users understand the toolchain.</p>
+      </article>
+    {{ end }}
+  </div>
+</section>

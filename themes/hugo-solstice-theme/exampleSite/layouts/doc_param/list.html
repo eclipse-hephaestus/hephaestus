@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="margin-bottom-20">
+  {{ .Content }}
+</div>
+
+{{ $categories := .Params.category_order }}
+{{ $pages := .Pages }}
+
+{{ range $category := $categories }}
+  {{ $catPages := where $pages "Params.category" $category }}
+  {{ with $catPages }}
+    <h2 id="{{ $category | urlize }}">{{ $category | title }}</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range sort . "Title" }}
+        <tr{{ if .Params.deprecated }} class="text-muted"{{ end }}>
+          <td>
+            <a class="param-name" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ if .Params.deprecated }}<br><span class="label label-danger">Deprecated</span>{{ end }}
+          </td>
+          <td><code>{{ .Params.param_type }}</code></td>
+          <td>{{ .Description | markdownify }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+{{ end }}
+{{ end }}

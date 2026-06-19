@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{ if .Params.deprecated }}
+<div class="alert alert-danger">
+  <strong>Deprecated:</strong> {{ with .Params.deprecated_message }}{{ . | markdownify }}{{ end }}
+</div>
+{{ end }}
+
+<p>{{ .Description | markdownify }}</p>
+
+<table class="table table-striped margin-bottom-30">
+  <thead>
+    <tr>
+      <th style="width: 180px">Property</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Type</td>
+      <td><code>{{ .Params.param_type }}</code></td>
+    </tr>
+    {{ with .Params.accepted_values }}
+    <tr>
+      <td>Accepted values</td>
+      <td>
+        <ul class="margin-bottom-0">
+          {{ range . }}
+          <li>{{ . | markdownify }}</li>
+          {{ end }}
+        </ul>
+      </td>
+    </tr>
+    {{ end }}
+    {{ if .Params.deprecated }}
+    <tr>
+      <td>Status</td>
+      <td><span class="label label-danger">Deprecated</span></td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+
+{{ .Content }}
+
+<p class="margin-top-30">
+  <a href="{{ .CurrentSection.RelPermalink }}"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> {{ .CurrentSection.Title }}</a>
+</p>
+{{ end }}

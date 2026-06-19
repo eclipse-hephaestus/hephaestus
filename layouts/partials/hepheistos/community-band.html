@@ -1,0 +1,45 @@
+<!--
+ ********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************
+-->
+{{ $section := site.GetPage "/home/community-band" }}
+<section class="section">
+  <div class="container community-panel">
+    <div>
+      <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Community" }}{{ else }}Community{{ end }}</p>
+      <h2>{{ with $section }}{{ .Params.title | default "Designed for open SDV ecosystem collaboration" }}{{ else }}Designed for open SDV ecosystem collaboration{{ end }}</h2>
+      <p>{{ with $section }}{{ .Params.lead | default "Hepheistos gives developers, integrators, researchers, and automotive ecosystem partners a shared place to align tooling workflows." }}{{ else }}Hepheistos gives developers, integrators, researchers, and automotive ecosystem partners a shared place to align tooling workflows.{{ end }}</p>
+    </div>
+    <div class="community-links">
+      {{ with $section }}
+        {{ with .Params.links }}
+          {{ range . }}
+            {{ $href := .url | default "#" }}
+            {{ if not (or (hasPrefix $href "http://") (hasPrefix $href "https://") (hasPrefix $href "mailto:")) }}
+              {{ $href = $href | relURL }}
+            {{ end }}
+            <a href="{{ $href }}">{{ .label | default "Link" }}</a>
+          {{ end }}
+        {{ else }}
+          <a href="{{ "community/" | relURL }}">Contribute</a>
+          <a href="{{ .Site.Params.gitlab_url }}">GitLab</a>
+          <a href="{{ .Site.Params.eclipse_sdv_url }}">Eclipse SDV</a>
+        {{ end }}
+      {{ else }}
+        <a href="{{ "community/" | relURL }}">Contribute</a>
+        <a href="{{ .Site.Params.gitlab_url }}">GitLab</a>
+        <a href="{{ .Site.Params.eclipse_sdv_url }}">Eclipse SDV</a>
+      {{ end }}
+    </div>
+  </div>
+</section>

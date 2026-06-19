@@ -1,0 +1,336 @@
+
+[[main]]
+    name = "Examples"
+    url = "/examples/"
+    weight = 2
+    identifier = "examples"
+
+    [main.params]
+      description = """
+        Examples of the different layouts and features offered by Hugo Solstice Theme.
+      """
+
+[[main]]
+    name = "Components"
+    url = "/components/"
+    weight = 1
+    identifier = "components"
+
+[[main]]
+    name = "Solstice Additions"
+    url = "/components/#solstice"
+    weight = 1
+    parent = "components"
+    identifier = "solstice"
+    pre = "<i class=\"fa-solid fa-sun\" aria-hidden></i>"
+
+[[main]]
+    name = "Events Framework"
+    url = "/components/#events-framework"
+    weight = 2
+    parent = "components"
+    identifier = "events"
+    pre = "<i class=\"fa-solid fa-calendar\" aria-hidden></i>"
+
+[[main]]
+    name = "Dynamic Content"
+    url = "/components/#dynamic"
+    weight = 3
+    parent = "components"
+    identifier = "dynamic"
+    pre = "<i class=\"fa-solid fa-bolt-lightning\" aria-hidden></i>"
+
+[[main]]
+    name = "Deprecated"
+    url = "/components/#deprecated"
+    weight = 4
+    parent = "components"
+    identifier = "deprecated"
+    pre = "<i class=\"fa-solid fa-ban\" aria-hidden></i>"
+
+[[main]]
+    name = "EclipseFdn Members List"
+    url = "/components/eclipsefdn_members_list/"
+    parent = "deprecated"
+
+[[main]]
+    name = "EclipseFdn Projects page"
+    url = "/components/eclipsefdn_projects_page/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Meeting Minutes"
+    url = "/components/meeting_minutes/"
+    weight = 3
+    parent = "deprecated"
+
+[[main]]
+    name = "Newsroom News"
+    url = "/components/newsroom/news/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Membership"
+    url = "/components/members/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Taxonomy list"
+    url = "/components/taxonomy_list/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Testimonials"
+    url = "/components/testimonials/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "YouTube videos"
+    url = "/components/youtube/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "FAQ"
+    url = "/components/faq/"
+    weight = 4
+    parent = "solstice"
+
+[[main]]
+    name = "Hubspot Contact Form"
+    url = "/components/hubspot/"
+    weight = 5
+    parent = "solstice"
+
+[[main]]
+    name = "Featured Footer"
+    url = "/components/featured_footer/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "HTML Tables"
+    url = "/components/tables/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Text Target"
+    url = "/components/text_target/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "RSS Feed"
+    url = "/components/rss/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "Video List"
+    url = "/components/video_list"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Adopters"
+    url = "/components/adopters"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Users Display"
+    url = "/components/user_display/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "User Bios"
+    url = "/components/user_bios/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Registration"
+    url = "/components/registration/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Agenda"
+    url = "/components/agenda/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Newsroom Resources"
+    url = "/components/newsroom/resources/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "News"
+    url = "/components/news/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Events"
+    url = "/components/events/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Newsroom Events"
+    url = "/components/newsroom/events/"
+    parent = "deprecated"
+
+[[main]]
+    name = "X Timeline"
+    url = "/components/twitter_timeline/"
+    parent = "deprecated"
+
+[[main]]
+    name = "X Buttons"
+    url = "/components/twitter_button/"
+    parent = "deprecated"
+
+[[main]]
+    name = "Changelog"
+    url = "/changelog/"
+    weight = 3
+    identifier = "changelog"
+
+# Demo menu: top-level entries with no children render as direct links.
+[[demo_direct]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[demo_direct]]
+    name = "Examples"
+    url = "/examples/"
+    weight = 2
+
+[[demo_direct]]
+    name = "Changelog"
+    url = "/changelog/"
+    weight = 3
+
+# Demo menu: top-level entries with one level of children render as dropdowns.
+[[demo_dropdown]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[demo_dropdown]]
+    identifier = "demo-dropdown-docs"
+    name = "Docs"
+    url = "#"
+    weight = 2
+
+[[demo_dropdown]]
+    parent = "demo-dropdown-docs"
+    name = "Components"
+    url = "/components/"
+    weight = 1
+
+[[demo_dropdown]]
+    parent = "demo-dropdown-docs"
+    name = "Front Matter"
+    url = "/frontmatter/"
+    weight = 2
+
+[[demo_dropdown]]
+    parent = "demo-dropdown-docs"
+    name = "Configuration"
+    url = "/configuration/"
+    weight = 3
+
+# Demo menu: top-level entries with grandchildren render as mega menus.
+[[demo_mega]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[demo_mega]]
+    identifier = "demo-mega-products"
+    name = "Products"
+    url = "#"
+    weight = 2
+
+[[demo_mega]]
+    parent = "demo-mega-products"
+    identifier = "demo-mega-tools"
+    name = "Tools"
+    weight = 1
+    pre = "<i class=\"fa-solid fa-wrench\" aria-hidden></i>"
+
+[[demo_mega]]
+    parent = "demo-mega-tools"
+    name = "Eclipse IDE"
+    url = "https://eclipseide.org/"
+    weight = 1
+
+[[demo_mega]]
+    parent = "demo-mega-tools"
+    name = "Theia"
+    url = "https://theia-ide.org/"
+    weight = 2
+
+[[demo_mega]]
+    parent = "demo-mega-products"
+    identifier = "demo-mega-platforms"
+    name = "Platforms"
+    weight = 2
+    pre = "<i class=\"fa-solid fa-layer-group\" aria-hidden></i>"
+
+[[demo_mega]]
+    parent = "demo-mega-platforms"
+    name = "Cloud Tools"
+    url = "/components/"
+    weight = 1
+
+[[demo_mega]]
+    parent = "demo-mega-platforms"
+    name = "Embedded"
+    url = "/components/"
+    weight = 2
+
+# Demo sidebar menu shown when a page sets `sidebar: ["demo-sidebar"]`.
+[[sidebar]]
+    identifier = "demo-sidebar"
+    name       = "Getting started"
+    url        = "#"
+    weight     = 1
+
+[[sidebar]]
+    parent = "demo-sidebar"
+    name   = "Introduction"
+    url    = "#introduction"
+    weight = 1
+
+[[sidebar]]
+    parent = "demo-sidebar"
+    name   = "Installation"
+    url    = "#installation"
+    weight = 2
+
+[[sidebar]]
+    parent = "demo-sidebar"
+    identifier = "demo-sidebar-advanced"
+    name   = "Advanced topics"
+    url    = "#advanced"
+    weight = 3
+
+[[sidebar]]
+    parent = "demo-sidebar-advanced"
+    name   = "Custom shortcodes"
+    url    = "#shortcodes"
+    weight = 1
+
+[[sidebar]]
+    parent = "demo-sidebar-advanced"
+    name   = "Theming"
+    url    = "#theming"
+    weight = 2

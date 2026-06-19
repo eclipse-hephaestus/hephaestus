@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-label="SDV tooling workflow illustration">
+  <defs>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#163b5b"/><stop offset="1" stop-color="#0b1726"/></linearGradient>
+    <linearGradient id="accent" x1="0" x2="1"><stop offset="0" stop-color="#f7941e"/><stop offset="1" stop-color="#00b5ad"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="24" stdDeviation="20" flood-color="#000" flood-opacity=".28"/></filter>
+  </defs>
+  <rect x="32" y="34" width="696" height="492" rx="36" fill="url(#panel)" filter="url(#shadow)"/>
+  <rect x="76" y="78" width="608" height="78" rx="22" fill="#fff" opacity=".08"/>
+  <circle cx="114" cy="117" r="12" fill="#f7941e"/><circle cx="150" cy="117" r="12" fill="#00b5ad"/><circle cx="186" cy="117" r="12" fill="#6b7cff"/>
+  <rect x="235" y="103" width="270" height="26" rx="13" fill="#fff" opacity=".18"/>
+  <g stroke="#00b5ad" stroke-width="5" fill="none" opacity=".75">
+    <path d="M168 256h120c25 0 25 48 50 48h84"/>
+    <path d="M168 355h120c25 0 25-48 50-48h84"/>
+    <path d="M456 307h128"/>
+  </g>
+  <g>
+    <rect x="92" y="215" width="150" height="92" rx="20" fill="#fff" opacity=".12"/>
+    <text x="116" y="253" fill="#fff" font-family="Inter,Arial" font-size="19" font-weight="700">Develop</text>
+    <text x="116" y="282" fill="#d8e2ef" font-family="Inter,Arial" font-size="15">templates + CLI</text>
+  </g>
+  <g>
+    <rect x="92" y="326" width="150" height="92" rx="20" fill="#fff" opacity=".12"/>
+    <text x="116" y="364" fill="#fff" font-family="Inter,Arial" font-size="19" font-weight="700">Model</text>
+    <text x="116" y="393" fill="#d8e2ef" font-family="Inter,Arial" font-size="15">systems + APIs</text>
+  </g>
+  <g>
+    <rect x="386" y="252" width="176" height="110" rx="24" fill="url(#accent)" opacity=".95"/>
+    <text x="423" y="300" fill="#08111f" font-family="Inter,Arial" font-size="21" font-weight="800">Hepheistos</text>
+    <text x="430" y="330" fill="#08111f" font-family="Inter,Arial" font-size="16">workflow hub</text>
+  </g>
+  <g>
+    <rect x="584" y="238" width="96" height="138" rx="20" fill="#fff" opacity=".13"/>
+    <text x="604" y="286" fill="#fff" font-family="Inter,Arial" font-size="18" font-weight="700">CI</text>
+    <text x="604" y="316" fill="#d8e2ef" font-family="Inter,Arial" font-size="14">test</text>
+    <text x="604" y="340" fill="#d8e2ef" font-family="Inter,Arial" font-size="14">release</text>
+  </g>
+  <path d="M190 468c60-42 121-44 184-6 39 23 91 23 155-4" stroke="#f7941e" stroke-width="7" fill="none" opacity=".75"/>
+</svg>

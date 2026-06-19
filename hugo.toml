@@ -1,0 +1,82 @@
+# ********************************************************************************
+# * Copyright (c) 2026 Contributors to the Eclipse Foundation
+# *
+# * See the NOTICE file(s) distributed with this work for additional
+# * information regarding copyright ownership.
+# *
+# * This program and the accompanying materials are made available under the
+# * terms of the Apache License 2.0 which is available at
+# * https://www.apache.org/licenses/LICENSE-2.0
+# *
+# * SPDX-License-Identifier: Apache-2.0
+# ********************************************************************************
+baseURL = "https://chheis.github.io/website-hephaestus-test/"
+languageCode = "en-us"
+title = "Eclipse Hepheistos"
+theme = "hugo-solstice-theme"
+enableRobotsTXT = true
+canonifyURLs = false
+relativeURLs = false
+
+[pagination]
+  pagerSize = 10
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[params]
+  description = "Eclipse Hepheistos provides open SDV tooling for building, integrating, and validating software-defined vehicle development workflows."
+  seo_title_suffix = " | Eclipse Hepheistos"
+  subtitle = "Eclipse Foundation"
+  logo = "images/hepheistos/logo.svg"
+  favicon = "images/hepheistos/favicon.svg"
+  share_img = "images/hepheistos/social-card.svg"
+  eclipse_projects_url = "https://projects.eclipse.org/"
+  eclipse_sdv_url = "https://sdv.eclipse.org/"
+  gitlab_url = "https://gitlab.eclipse.org/"
+  call_for_action_text = "Get Started"
+  call_for_action_url = "getting-started/"
+  call_for_action_icon = "fa fa-rocket"
+  main_content_class = "col-md-18 padding-bottom-30"
+  main_sidebar_class = "col-md-6 padding-bottom-30"
+  
+[params.author]
+  name = "Eclipse Hepheistos"
+  website = "https://projects.eclipse.org/"
+  email = "hepheistos@eclipse.org"
+  twitter = "EclipseFdn"
+
+[[params.styles]]
+  url = "css/neptune.css"
+  cache = true
+
+[[params.scripts]]
+  url = "js/neptune.js"
+  cache = true
+
+[menu]
+  [[menu.main]]
+    name = "Getting Started"
+    url = "/getting-started/"
+    weight = 10
+  [[menu.main]]
+    name = "Tooling"
+    url = "/tooling/"
+    weight = 20
+  [[menu.main]]
+    name = "Docs"
+    url = "/docs/"
+    weight = 30
+  [[menu.main]]
+    name = "Community"
+    url = "/community/"
+    weight = 40
+  [[menu.main]]
+    name = "Downloads"
+    url = "/downloads/"
+    weight = 50

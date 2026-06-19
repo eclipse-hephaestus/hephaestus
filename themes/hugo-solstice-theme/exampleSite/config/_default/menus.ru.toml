@@ -1,0 +1,204 @@
+
+[[main]]
+    name = "Examples"
+    url = "/examples/"
+    weight = 2
+    identifier = "examples"
+
+[[main]]
+    name = "Components"
+    url = "/components/"
+    weight = 3
+    identifier = "components"
+
+[[main]]
+    name = "Solstice Additions"
+    url = "/components/#solstice"
+    weight = 1
+    parent = "components"
+    identifier = "solstice"
+
+[[main]]
+    name = "Events Framework"
+    url = "/components/#events-framework"
+    weight = 2
+    parent = "components"
+    identifier = "events"
+
+[[main]]
+    name = "Dynamic Content"
+    url = "/components/#dynamic"
+    weight = 3
+    parent = "components"
+    identifier = "dynamic"
+
+[[main]]
+    name = "Deprecated"
+    url = "/components/#deprecated"
+    weight = 4
+    parent = "components"
+    identifier = "deprecated"
+
+[[main]]
+    name = "Meeting Minutes"
+    url = "/components/meeting_minutes/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Membership"
+    url = "/components/members/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Taxonomy list"
+    url = "/components/taxonomy_list/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Testimonials"
+    url = "/components/testimonials/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "YouTube videos"
+    url = "/components/youtube/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "FAQ"
+    url = "/components/faq/"
+    weight = 4
+    parent = "solstice"
+
+[[main]]
+    name = "Hubspot Contact Form"
+    url = "/components/hubspot/"
+    weight = 5
+    parent = "solstice"
+
+[[main]]
+    name = "Featured Footer"
+    url = "/components/featured_footer/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Featured Story"
+    url = "/components/featured_story/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "HTML Tables"
+    url = "/components/tables/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Text Target"
+    url = "/components/text_target/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Twitter Timeline"
+    url = "/components/twitter_timeline/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Twitter Buttons"
+    url = "/components/twitter_button/"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Video List"
+    url = "/components/video_list"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "Adopters"
+    url = "/components/adopters"
+    weight = 3
+    parent = "solstice"
+
+[[main]]
+    name = "RSS Feed"
+    url = "/components/rss/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "Users Display"
+    url = "/components/user_display/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "User Bios"
+    url = "/components/user_bios/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Registration"
+    url = "/components/registration/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Agenda"
+    url = "/components/agenda/"
+    weight = 3
+    parent = "events"
+
+[[main]]
+    name = "Newsroom News"
+    url = "/components/newsroom/news/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "Newsroom Events"
+    url = "/components/newsroom/events/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "Newsroom Resources"
+    url = "/components/newsroom/resources/"
+    weight = 3
+    parent = "dynamic"
+
+[[main]]
+    name = "News"
+    url = "/components/news/"
+    weight = 2
+    parent = "deprecated"
+
+[[main]]
+    name = "Events"
+    url = "/components/events/"
+    weight = 3
+    parent = "deprecated"
+
+[[main_menu_demo]]
+    identifier = "custom-menu"
+    name = "Custom Menu"
+    weight = 1
+
+[[main_menu_demo]]
+    parent = "custom-menu"
+    name = "Go Home"
+    url = "/"
+    weight = 1
+
+# Custom sidebar
+

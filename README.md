@@ -14,28 +14,39 @@
 -->
 # Eclipse SDV Hephaestus website
 
-A Hugo-based, GitHub Pages-ready website starter for the Eclipse SDV Hephaestus SDV tooling project.
-
-The design is intentionally Solstice-aligned: Eclipse-style navigation, dark project hero, project CTAs, card grids, documentation pages, community links, and a minimal override layer that can later be wired to the official Eclipse `hugo-solstice-theme`.
+A Hugo-based, GitHub Pages-ready website for the Eclipse SDV Hephaestus SDV tooling project built on the official Eclipse Foundation [`hugo-solstice-theme`](https://gitlab.eclipse.org/eclipsefdn/software-dev/frameworks-and-tools/hugo-solstice-theme).
 
 ## What is included
 
 ```text
 .
-â”œâ”€â”€ .github/workflows/pages.yml      # GitHub Pages deployment workflow
-â”œâ”€â”€ archetypes/default.md            # Hugo content archetype
-â”œâ”€â”€ assets/scss/hephaestus.scss      # Placeholder for future SCSS pipeline
-â”œâ”€â”€ content/                         # Homepage and section pages
-â”œâ”€â”€ layouts/                         # Hugo templates and partials
-â”œâ”€â”€ static/css/hephaestus.css        # Project stylesheet
-â”œâ”€â”€ static/images/hephaestus/        # SVG logo and illustrations
-â”œâ”€â”€ hugo.toml                        # Hugo site configuration
-â””â”€â”€ README.md
+├── .github/workflows/pages.yml      # GitHub Pages deployment workflow
+├── archetypes/default.md            # Hugo content archetype
+├── assets/scss/hephaestus.scss      # Placeholder for future SCSS pipeline
+├── content/                         # Homepage and section pages
+├── layouts/                         # Hugo templates and partials
+├── static/css/hephaestus.css        # Project stylesheet
+├── static/images/hephaestus/        # SVG logo and illustrations
+├── themes/hugo-solstice-theme/      # Eclipse Solstice theme (git submodule)
+├── hugo.toml                        # Hugo site configuration
+└── README.md
 ```
 
 ## Local development
 
-Install Hugo Extended, then run:
+Install Hugo Extended, then clone the repository with submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/eclipse-hephaestus/hephaestus.git
+```
+
+If you already cloned without `--recurse-submodules`, initialise the theme submodule first:
+
+```bash
+git submodule update --init --recursive
+```
+
+Then run:
 
 ```bash
 hugo server -D
@@ -78,21 +89,21 @@ baseURL = "https://YOUR-ORG.github.io/"
 
 The workflow also passes GitHub Pages' detected base URL at build time, so Pages deployments should still work after repository setup.
 
-## Optional: wire to the official Eclipse Solstice theme
+## Theme
 
-This starter is self-contained so it can be uploaded to GitHub and deployed immediately. To move closer to the official Eclipse Foundation web stack later, add the Solstice theme as a submodule and migrate only the base template/header/footer overrides that you want to keep:
+The site uses the official Eclipse Foundation `hugo-solstice-theme` pinned at tag `v3.0.1`, included as a git submodule at `themes/hugo-solstice-theme/`.
+
+Hephaestus-specific overrides are kept under `layouts/partials/hephaestus/` and `static/css/hephaestus.css`.
+
+To update the theme to a newer release:
 
 ```bash
-git submodule add https://gitlab.eclipse.org/eclipsefdn/software-dev/frameworks-and-tools/hugo-solstice-theme.git themes/hugo-solstice-theme
+cd themes/hugo-solstice-theme
+git checkout <new-tag>
+cd ../..
+git add themes/hugo-solstice-theme
+git commit -m "chore: update hugo-solstice-theme to <new-tag>"
 ```
-
-Then set this in `hugo.toml`:
-
-```toml
-theme = "hugo-solstice-theme"
-```
-
-Keep the hephaestus-specific partials under `layouts/partials/hephaestus/` and the project CSS under `static/css/hephaestus.css` or move it into the Solstice asset pipeline as needed.
 
 ## Editing content
 

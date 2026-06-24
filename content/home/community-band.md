@@ -1,7 +1,7 @@
 ---
 title: "Designed for open SDV ecosystem collaboration"
 kicker: "Community"
-lead: "Hepheistos gives developers, integrators, researchers, and automotive ecosystem partners a shared place to align tooling workflows."
+lead: "Eclipse SDV Hephaestus gives developers, integrators, researchers, and automotive ecosystem partners a shared place to align tooling workflows."
 links:
   - label: "Contribute"
     url: "community/"

@@ -4,6 +4,6 @@
   <circle cx="990" cy="120" r="180" fill="#00b5ad" opacity=".24"/>
   <circle cx="180" cy="530" r="160" fill="#f7941e" opacity=".22"/>
   <text x="96" y="210" fill="#f7941e" font-family="Inter,Arial" font-size="34" font-weight="800" letter-spacing="6">ECLIPSE SDV TOOLING</text>
-  <text x="96" y="315" fill="#fff" font-family="Inter,Arial" font-size="82" font-weight="800">Eclipse Hepheistos</text>
+  <text x="96" y="315" fill="#fff" font-family="Inter,Arial" font-size="82" font-weight="800">Eclipse SDV Hephaestus</text>
   <text x="96" y="395" fill="#d8e2ef" font-family="Inter,Arial" font-size="38">Open tooling for software-defined vehicle development</text>
 </svg>

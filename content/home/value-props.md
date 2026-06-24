@@ -1,7 +1,7 @@
 ---
 title: "Practical tooling for open SDV collaboration"
-kicker: "Why Hepheistos?"
-lead: "Hepheistos is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle."
+kicker: "Why Eclipse SDV Hephaestus?"
+lead: "hephaestus is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle."
 cards:
   - icon: "01"
     title: "Composable tooling"

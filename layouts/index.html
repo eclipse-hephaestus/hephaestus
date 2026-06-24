@@ -1,4 +1,4 @@
-<!--
+{{/*
  ********************************************************************************
  * Copyright (c) 2026 Contributors to the Eclipse Foundation
  *
@@ -11,10 +11,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************
--->
+*/}}
 {{ define "main" }}
 {{ $sections := .Params.home_sections | default (slice "hero" "value-props" "architecture" "tooling-grid" "community-band" "cta-band") }}
 {{ range $sections }}
-	{{ partial (printf "hepheistos/%s.html" .) $ }}
+	{{ partial (printf "hephaestus/%s.html" .) $ }}
 {{ end }}
 {{ end }}

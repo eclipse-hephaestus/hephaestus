@@ -1,12 +1,12 @@
-# Notices for the Fleet Management Service Blueprint
+# Notices for the Eclipse SDV Hephaestus
 
-This content is produced and maintained by the Eclipse SDV Blueprints project.
+This content is produced and maintained by the Eclipse SDV Hephaestus.
 
 * Project home: https://projects.eclipse.org/projects/automotive.hephaestus
 
 ## Trademarks
 
-Eclipse SDV Blueprints is a trademark of the Eclipse Foundation. Eclipse, and the
+Eclipse SDV Hephaestus is a trademark of the Eclipse Foundation. Eclipse, and the
 Eclipse Logo are registered trademarks of the Eclipse Foundation.
 
 ## Copyright

@@ -14,7 +14,7 @@
 -->
 # How to contribute
 
-First of all, thanks for considering to contribute to the Eclipse SDV Fleet Management Blueprint.
+First of all, thanks for considering to contribute to the Eclipse SDV Hephaestus.
 We really appreciate the time and effort you want to spend helping to improve things around here.
 And help we can use :-)
 

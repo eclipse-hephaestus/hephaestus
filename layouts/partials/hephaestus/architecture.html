@@ -16,12 +16,12 @@
 <section class="section section-dark">
   <div class="container split-grid">
     <div class="diagram-card">
-      <img src="{{ with $section }}{{ .Params.image | default "images/hepheistos/architecture-overview.svg" | relURL }}{{ else }}{{ "images/hepheistos/architecture-overview.svg" | relURL }}{{ end }}" alt="{{ with $section }}{{ .Params.image_alt | default "Hepheistos architecture overview" }}{{ else }}Hepheistos architecture overview{{ end }}">
+      <img src="{{ with $section }}{{ .Params.image | default "images/hephaestus/architecture-overview.svg" | relURL }}{{ else }}{{ "images/hephaestus/architecture-overview.svg" | relURL }}{{ end }}" alt="{{ with $section }}{{ .Params.image_alt | default "hephaestus architecture overview" }}{{ else }}hephaestus architecture overview{{ end }}">
     </div>
     <div>
       <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Architecture" }}{{ else }}Architecture{{ end }}</p>
       <h2>{{ with $section }}{{ .Params.title | default "Connect tools across the SDV lifecycle" }}{{ else }}Connect tools across the SDV lifecycle{{ end }}</h2>
-      <p class="lead">{{ with $section }}{{ .Params.lead | default "Present Hepheistos as a connective layer for requirements, modeling, development, CI, simulation, validation, release, and operations." }}{{ else }}Present Hepheistos as a connective layer for requirements, modeling, development, CI, simulation, validation, release, and operations.{{ end }}</p>
+      <p class="lead">{{ with $section }}{{ .Params.lead | default "Present hephaestus as a connective layer for requirements, modeling, development, CI, simulation, validation, release, and operations." }}{{ else }}Present hephaestus as a connective layer for requirements, modeling, development, CI, simulation, validation, release, and operations.{{ end }}</p>
       <ul class="checklist">
         {{ with $section }}
           {{ with .Params.checklist }}

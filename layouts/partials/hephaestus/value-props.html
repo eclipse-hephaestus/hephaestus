@@ -15,9 +15,9 @@
 {{ $section := site.GetPage "/home/value-props" }}
 <section class="section">
   <div class="container center intro">
-    <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Why Hepheistos?" }}{{ else }}Why Hepheistos?{{ end }}</p>
+    <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Why hephaestus?" }}{{ else }}Why hephaestus?{{ end }}</p>
     <h2>{{ with $section }}{{ .Params.title | default "Practical tooling for open SDV collaboration" }}{{ else }}Practical tooling for open SDV collaboration{{ end }}</h2>
-    <p class="lead muted">{{ with $section }}{{ .Params.lead | default "Hepheistos is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle." }}{{ else }}Hepheistos is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle.{{ end }}</p>
+    <p class="lead muted">{{ with $section }}{{ .Params.lead | default "hephaestus is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle." }}{{ else }}hephaestus is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle.{{ end }}</p>
   </div>
   <div class="container card-grid three">
     {{ with $section }}

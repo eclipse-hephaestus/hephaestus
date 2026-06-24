@@ -1,6 +1,6 @@
 ---
 title: "Documentation"
-tagline: "Architecture, workflows, examples, and contributor guides for Eclipse Hepheistos."
+tagline: "Architecture, workflows, examples, and contributor guides for Eclipse SDV Hephaestus."
 ---
 
 ## Documentation sections
@@ -13,4 +13,4 @@ tagline: "Architecture, workflows, examples, and contributor guides for Eclipse 
 
 ## Architecture model
 
-Hepheistos should document how individual tools connect across requirements, modeling, development, CI, simulation, validation, release, and operations.
+hephaestus should document how individual tools connect across requirements, modeling, development, CI, simulation, validation, release, and operations.

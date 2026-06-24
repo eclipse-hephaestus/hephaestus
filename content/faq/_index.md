@@ -1,11 +1,11 @@
 ---
 title: "FAQ"
-tagline: "Answers to common questions about Eclipse Hepheistos."
+tagline: "Answers to common questions about Eclipse SDV Hephaestus."
 ---
 
-## What is Eclipse Hepheistos?
+## What is Eclipse SDV Hephaestus?
 
-Eclipse Hepheistos is a project site concept for open SDV tooling across development, integration, validation, and examples.
+Eclipse SDV Hephaestus is a project site concept for open SDV tooling across development, integration, validation, and examples.
 
 ## Is this ready for GitHub Pages?
 

@@ -10,9 +10,9 @@
 # *
 # * SPDX-License-Identifier: Apache-2.0
 # ********************************************************************************
-baseURL = "https://chheis.github.io/website-hephaestus-test/"
+baseURL = "https://eclipse-hephaestus.github.io/hephaestus"
 languageCode = "en-us"
-title = "Eclipse Hepheistos"
+title = "Eclipse SDV Hephaestus"
 theme = "hugo-solstice-theme"
 enableRobotsTXT = true
 canonifyURLs = false
@@ -30,12 +30,12 @@ relativeURLs = false
     unsafe = true
 
 [params]
-  description = "Eclipse Hepheistos provides open SDV tooling for building, integrating, and validating software-defined vehicle development workflows."
-  seo_title_suffix = " | Eclipse Hepheistos"
+  description = "Eclipse SDV Hephaestus provides open SDV tooling for building, integrating, and validating software-defined vehicle development workflows."
+  seo_title_suffix = " | Eclipse SDV Hephaestus"
   subtitle = "Eclipse Foundation"
-  logo = "images/hepheistos/logo.svg"
-  favicon = "images/hepheistos/favicon.svg"
-  share_img = "images/hepheistos/social-card.svg"
+  logo = "images/hephaestus/logo.svg"
+  favicon = "images/hephaestus/favicon.svg"
+  share_img = "images/hephaestus/social-card.svg"
   eclipse_projects_url = "https://projects.eclipse.org/"
   eclipse_sdv_url = "https://sdv.eclipse.org/"
   gitlab_url = "https://gitlab.eclipse.org/"
@@ -46,9 +46,9 @@ relativeURLs = false
   main_sidebar_class = "col-md-6 padding-bottom-30"
   
 [params.author]
-  name = "Eclipse Hepheistos"
+  name = "Eclipse SDV Hephaestus"
   website = "https://projects.eclipse.org/"
-  email = "hepheistos@eclipse.org"
+  email = "hephaestus@eclipse.org"
   twitter = "EclipseFdn"
 
 [[params.styles]]

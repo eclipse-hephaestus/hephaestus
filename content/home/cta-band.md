@@ -1,5 +1,5 @@
 ---
-title: "Start building with Eclipse Hepheistos"
+title: "Start building with Eclipse SDV Hephaestus"
 lead: "Explore the documentation, try the examples, and join the community shaping open SDV tooling."
 buttons:
   - label: "Get Started"

@@ -12,9 +12,9 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************
 -->
-# Eclipse Hepheistos website
+# Eclipse SDV Hephaestus website
 
-A Hugo-based, GitHub Pages-ready website starter for the Eclipse Hepheistos SDV tooling project.
+A Hugo-based, GitHub Pages-ready website starter for the Eclipse SDV Hephaestus SDV tooling project.
 
 The design is intentionally Solstice-aligned: Eclipse-style navigation, dark project hero, project CTAs, card grids, documentation pages, community links, and a minimal override layer that can later be wired to the official Eclipse `hugo-solstice-theme`.
 
@@ -24,11 +24,11 @@ The design is intentionally Solstice-aligned: Eclipse-style navigation, dark pro
 .
 â”œâ”€â”€ .github/workflows/pages.yml      # GitHub Pages deployment workflow
 â”œâ”€â”€ archetypes/default.md            # Hugo content archetype
-â”œâ”€â”€ assets/scss/hepheistos.scss      # Placeholder for future SCSS pipeline
+â”œâ”€â”€ assets/scss/hephaestus.scss      # Placeholder for future SCSS pipeline
 â”œâ”€â”€ content/                         # Homepage and section pages
 â”œâ”€â”€ layouts/                         # Hugo templates and partials
-â”œâ”€â”€ static/css/hepheistos.css        # Project stylesheet
-â”œâ”€â”€ static/images/hepheistos/        # SVG logo and illustrations
+â”œâ”€â”€ static/css/hephaestus.css        # Project stylesheet
+â”œâ”€â”€ static/images/hephaestus/        # SVG logo and illustrations
 â”œâ”€â”€ hugo.toml                        # Hugo site configuration
 â””â”€â”€ README.md
 ```
@@ -92,7 +92,7 @@ Then set this in `hugo.toml`:
 theme = "hugo-solstice-theme"
 ```
 
-Keep the Hepheistos-specific partials under `layouts/partials/hepheistos/` and the project CSS under `static/css/hepheistos.css` or move it into the Solstice asset pipeline as needed.
+Keep the hephaestus-specific partials under `layouts/partials/hephaestus/` and the project CSS under `static/css/hephaestus.css` or move it into the Solstice asset pipeline as needed.
 
 ## Editing content
 
@@ -107,7 +107,7 @@ Main pages live under `content/`:
 - `content/news/_index.md`
 - `content/faq/_index.md`
 
-Homepage sections are rendered from partials in `layouts/partials/hepheistos/`.
+Homepage sections are rendered from partials in `layouts/partials/hephaestus/`.
 
 ## Notes
 

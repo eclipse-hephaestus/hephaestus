@@ -1,0 +1,42 @@
+<!--
+ ********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************
+-->
+{{ $section := site.GetPage "/home/cta-band" }}
+<section class="cta-band">
+  <div class="container cta-grid">
+    <div>
+      <h2>{{ with $section }}{{ .Params.title | default "Start building with Eclipse SDV Hephaestus" }}{{ else }}Start building with Eclipse SDV Hephaestus{{ end }}</h2>
+      <p>{{ with $section }}{{ .Params.lead | default "Explore the documentation, try the examples, and join the community shaping open SDV tooling." }}{{ else }}Explore the documentation, try the examples, and join the community shaping open SDV tooling.{{ end }}</p>
+    </div>
+    <div class="button-row right">
+      {{ with $section }}
+        {{ with .Params.buttons }}
+          {{ range . }}
+            {{ $href := .url | default "#" }}
+            {{ if not (or (hasPrefix $href "http://") (hasPrefix $href "https://") (hasPrefix $href "mailto:")) }}
+              {{ $href = $href | relURL }}
+            {{ end }}
+            <a class="btn {{ .class | default "btn-primary" }}" href="{{ $href }}">{{ .label | default "Learn more" }}</a>
+          {{ end }}
+        {{ else }}
+          <a class="btn btn-primary" href="{{ "getting-started/" | relURL }}">Get Started</a>
+          <a class="btn btn-secondary" href="{{ "community/" | relURL }}">Join the Community</a>
+        {{ end }}
+      {{ else }}
+        <a class="btn btn-primary" href="{{ "getting-started/" | relURL }}">Get Started</a>
+        <a class="btn btn-secondary" href="{{ "community/" | relURL }}">Join the Community</a>
+      {{ end }}
+    </div>
+  </div>
+</section>

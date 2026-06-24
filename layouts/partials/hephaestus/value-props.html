@@ -1,0 +1,67 @@
+<!--
+ ********************************************************************************
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************
+-->
+{{ $section := site.GetPage "/home/value-props" }}
+<section class="section">
+  <div class="container center intro">
+    <p class="kicker">{{ with $section }}{{ .Params.kicker | default "Why hephaestus?" }}{{ else }}Why hephaestus?{{ end }}</p>
+    <h2>{{ with $section }}{{ .Params.title | default "Practical tooling for open SDV collaboration" }}{{ else }}Practical tooling for open SDV collaboration{{ end }}</h2>
+    <p class="lead muted">{{ with $section }}{{ .Params.lead | default "hephaestus is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle." }}{{ else }}hephaestus is positioned as a home for reusable tooling, examples, and integrations across the software-defined vehicle lifecycle.{{ end }}</p>
+  </div>
+  <div class="container card-grid three">
+    {{ with $section }}
+      {{ with .Params.cards }}
+        {{ range . }}
+          <article class="card">
+            <span class="icon">{{ .icon | default "" }}</span>
+            <h3>{{ .title | default "" }}</h3>
+            <p>{{ .text | default "" }}</p>
+          </article>
+        {{ end }}
+      {{ else }}
+        <article class="card">
+          <span class="icon">01</span>
+          <h3>Composable tooling</h3>
+          <p>Integrate tools across the SDV lifecycle instead of locking teams into a single workflow.</p>
+        </article>
+        <article class="card">
+          <span class="icon">02</span>
+          <h3>Open collaboration</h3>
+          <p>Build in the open using Eclipse Foundation governance, transparency, and community-first development.</p>
+        </article>
+        <article class="card">
+          <span class="icon">03</span>
+          <h3>Engineering confidence</h3>
+          <p>Support validation, repeatability, traceability, and maintainable delivery pipelines for vehicle software.</p>
+        </article>
+      {{ end }}
+    {{ else }}
+      <article class="card">
+        <span class="icon">01</span>
+        <h3>Composable tooling</h3>
+        <p>Integrate tools across the SDV lifecycle instead of locking teams into a single workflow.</p>
+      </article>
+      <article class="card">
+        <span class="icon">02</span>
+        <h3>Open collaboration</h3>
+        <p>Build in the open using Eclipse Foundation governance, transparency, and community-first development.</p>
+      </article>
+      <article class="card">
+        <span class="icon">03</span>
+        <h3>Engineering confidence</h3>
+        <p>Support validation, repeatability, traceability, and maintainable delivery pipelines for vehicle software.</p>
+      </article>
+    {{ end }}
+  </div>
+</section>

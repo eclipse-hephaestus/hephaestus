@@ -120,6 +120,53 @@ Main pages live under `content/`:
 
 Homepage sections are rendered from partials in `layouts/partials/hephaestus/`.
 
+## Requirements & traceability (sphinx-needs)
+
+`requirements/` is a separate [Sphinx](https://www.sphinx-doc.org/) +
+[sphinx-needs](https://sphinx-needs.readthedocs.io/) project for
+requirements/traceability docs. It's a distinct toolchain from the Hugo
+marketing site on purpose (sphinx-needs has no Hugo equivalent), but is
+published under the same GitHub Pages deployment at `/requirements/`, with
+cross-links back into the Hugo site and a matching top navigation bar.
+
+### Local build
+
+```bash
+pip install -r requirements/requirements.txt
+hugo --gc                                    # produces public/index.json
+python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv requirements/_extra/nav.json
+python -m sphinx -b html requirements requirements/_build/html
+```
+
+Open `requirements/_build/html/index.html`. Skipping the Hugo build/conversion
+steps still produces a working build — `hugo:` cross-references and the
+shared nav bar just won't resolve.
+
+### How the pieces fit together
+
+- **`hugo.toml`** declares a custom `JSON` output format on the home page, so
+  `hugo build` additionally writes `public/index.json` — a machine-readable
+  inventory of every page plus the main menu (see `layouts/index.json.json`).
+- **`scripts/hugo_json_to_objects_inv.py`** turns that inventory into a real
+  Sphinx `objects.inv` (via [`sphobjinv`](https://sphobjinv.readthedocs.io/)),
+  so `requirements/conf.py`'s `intersphinx_mapping` can resolve `` {doc}`hugo:<path>` ``
+  references from the requirements docs into Hugo pages — the same mechanism
+  Sphinx projects use to link into each other, just pointed at a generated
+  (rather than Sphinx-built) inventory. It also copies the nav portion to
+  `nav.json`, used below.
+- **`requirements/_static/shared-nav.{js,css}`** fetch `nav.json` at runtime
+  and render a top bar matching the Hugo site's header/nav, so navigation
+  looks the same on both sites without duplicating template logic per theme.
+- **Build order matters and is one-directional**: Hugo must build before the
+  conversion script, which must run before `sphinx-build`. The reverse
+  direction (Hugo linking into specific requirements) is intentionally *not*
+  build-time validated — that would require Sphinx to build before Hugo,
+  creating a real circular dependency. Link to individual requirements with
+  plain, stable URLs (e.g. `/requirements/traceability.html#REQ_001`) instead.
+- **`.github/workflows/pages.yml`** runs the steps above in order, then
+  copies `requirements/_build/html/` into `public/requirements/` before the
+  single combined Pages artifact upload.
+
 ## Notes
 
 - This repository intentionally avoids committing generated build output.

@@ -25,6 +25,17 @@ relativeURLs = false
   [caches.images]
     dir = ':cacheDir/images'
 
+# Machine-readable site inventory (pages + nav), consumed by the
+# requirements/ Sphinx-needs project to generate an intersphinx-compatible
+# objects.inv and to render a matching top navigation. See scripts/hugo_json_to_objects_inv.py.
+[outputFormats.JSON]
+  mediaType = "application/json"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "JSON"]
+
 [markup]
   [markup.goldmark.renderer]
     unsafe = true

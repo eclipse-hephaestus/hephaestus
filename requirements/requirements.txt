@@ -1,0 +1,5 @@
+sphinx>=7,<9
+sphinx-needs>=3
+myst-parser>=3
+furo
+sphobjinv

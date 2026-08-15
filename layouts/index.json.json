@@ -31,6 +31,8 @@
     "title" .Site.Title
     "baseURL" .Site.BaseURL
     "logo" .Site.Params.logo
+    "callToActionText" .Site.Params.call_for_action_text
+    "callToActionURL" (.Site.Params.call_for_action_url | absURL)
   )
   "nav" $nav
   "pages" $pages

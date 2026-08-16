@@ -142,7 +142,7 @@ of cross-project intersphinx.
 pip install -r scripts/requirements.txt
 hugo --gc                                    # produces public/index.json
 python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv docs/_extra/nav.json
-python -m sphinx -b html docs docs/_build/html
+python -m sphinx -b html docs docs/_build/html -W
 ```
 
 Open `docs/_build/html/index.html`. Skipping the Hugo build/conversion steps
@@ -175,13 +175,10 @@ bar just won't resolve.
   Link to specific pages with plain, stable URLs instead (e.g. the
   "Requirements" nav entry in `hugo.toml` just points at
   `/docs/requirements/`).
-- **`.github/workflows/pages.yml`** runs the steps above in order, then
-  copies `docs/_build/html/` into `public/docs/` before the single combined
-  Pages artifact upload.
-- **`.github/workflows/pages.yml`** runs the steps above in order, then
-  copies both `requirements/_build/html/` and `docs/_build/html/` into
-  `public/requirements/` and `public/docs/` before the single combined Pages
-  artifact upload.
+- **`.github/workflows/pages.yml`** runs the steps above in order, building
+  Sphinx's output straight into `public/docs/` (rather than `docs/_build/html/`
+  followed by a copy) so the Hugo and Sphinx sites land under one `public/`
+  tree for the single combined Pages artifact upload.
 
 ## Notes
 

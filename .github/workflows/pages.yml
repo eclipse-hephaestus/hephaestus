@@ -83,20 +83,14 @@ jobs:
 
       # 3) docs/ (general docs + nested requirements/ sphinx-needs section)
       #    consumes hugo-objects.inv via intersphinx_mapping (docs/conf.py)
-      #    so `hugo:` cross-references resolve.
+      #    so `hugo:` cross-references resolve. Building straight into
+      #    public/docs/ ships both builds in a single Pages artifact under
+      #    one origin without a separate merge/copy step.
       - name: Build docs (Sphinx) site
         env:
           HUGO_BASE_URL: ${{ steps.pages.outputs.base_url }}/
         run: |
-          python -m sphinx -b html docs docs/_build/html -W
-
-      # 4) Merge: ship both builds in a single Pages artifact under one origin.
-      #    Hugo no longer has a content/docs/ page — /docs/ (and its nested
-      #    /docs/requirements/) is served entirely by this Sphinx build.
-      - name: Merge docs site into public/
-        run: |
-          mkdir -p public/docs
-          cp -r docs/_build/html/. public/docs/
+          python -m sphinx -b html docs public/docs -W
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

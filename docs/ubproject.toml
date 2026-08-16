@@ -1,0 +1,410 @@
+"$schema" = "https://ubcode.useblocks.com/ubproject.schema.json"
+
+[project]
+name = "agentic-project"
+version = "0.1.0"
+
+[source]
+# Skip framework-internal directories so they are not parsed as needs.
+extend_exclude = [".specify"]
+
+[needs]
+id_required = true
+id_regex = "^[A-Z]+_[A-Z][A-Z0-9_]*$"
+
+# This profile ships the COMPLETE V-model, authored SYMMETRICALLY across both arms
+# of the lower V as NEEDS-IN-SOURCE:
+#
+# - the decomposition arm runs `user_story -> req -> arch`;
+# - the implementation arm runs one `code` stage that PRODUCES an `impl` need: a
+#   one-line codelinks marker in the production source materialises a real `impl`
+#   need carrying its `implements` link UP to the arch it realises, and the stage's
+#   bidirectional `implements` trace edge counts the arch's incoming `implements_back`
+#   for coverage;
+# - the verification arm runs one `tests` stage that PRODUCES a `test` need the same
+#   way: a one-line marker in the test source materialises a real `test` need carrying
+#   its `verifies` link UP to the arch it covers, and the stage's bidirectional
+#   `verifies` trace edge counts the arch's incoming `verifies_back`.
+#
+# Both lower arms are IMPL-/TESTS-AS-NEEDS: a one-line codelinks marker in source
+# materialises a real need carrying its trace link, gated by the stage's trace edge.
+# This replaces the earlier `@need-ids:` `code_url` back-attach (implementation arm)
+# and the broken `unit_test_url` / `integ_test_url` / `e2e_test_url` URL-field split
+# (verification arm), both of which back-attached a URL onto the arch instead of
+# materialising a need and assumed a clean code-vs-test DIRECTORY layout.
+
+# --- NEED TYPES (the V-model ontology) ---
+# Rename, add, or remove types to match your project's V-model. Every type the
+# [workflow] stages produce or trace against is declared here.
+
+[[needs.types]]
+directive = "user_story"
+title = "User Story"
+prefix = "US_"
+
+[[needs.types]]
+directive = "req"
+title = "Requirement"
+prefix = "REQ_"
+
+[[needs.types]]
+directive = "arch"
+title = "Architecture"
+prefix = "ARCH_"
+
+# The implementation-arm need: an implementation element authored as a real need via
+# a one-line codelinks marker in production source. It `implements` the `arch` it
+# realises, and the `code` stage's trace edge counts that incoming `implements_back`
+# for coverage.
+[[needs.types]]
+directive = "impl"
+title = "Implementation"
+prefix = "IMPL_"
+
+# The verification-arm need: a test case authored as a real need via a one-line
+# codelinks marker in test source. It `verifies` the `arch` it covers, and the
+# `tests` stage's trace edge counts that incoming `verifies_back` for coverage.
+[[needs.types]]
+directive = "test"
+title = "Test"
+prefix = "TEST_"
+
+[[needs.types]]
+directive = "risk"
+title = "Risk"
+prefix = "RISK_"
+
+[[needs.types]]
+directive = "decision"
+title = "Decision"
+prefix = "DEC_"
+
+# --- LINKS ---
+# Declare every link the [workflow] trace edges reference here.
+
+[needs.links.traces_to]
+incoming = "traces_from"
+outgoing = "traces_to"
+
+[needs.links.satisfies]
+incoming = "satisfied_by"
+outgoing = "satisfies"
+
+# The implementation link: an `impl` need's outgoing `implements` points at the `arch`
+# it realises; the arch's incoming `implements_back` is what the `code` stage's trace
+# edge counts. Declared here so `ubc build` emits the field and the one-line marker's
+# `implements` list-field resolves to a real link (an undeclared link is silently
+# ignored at runtime).
+[needs.links.implements]
+incoming = "implements_back"
+outgoing = "implements"
+
+# The verification link: a `test` need's outgoing `verifies` points at the `arch`
+# it covers; the arch's incoming `verifies_back` is what the `tests` stage's trace
+# edge counts. Declared here so `ubc build` emits the field and the one-line marker's
+# `verifies` list-field resolves to a real link (an undeclared link is silently
+# ignored at runtime).
+[needs.links.verifies]
+incoming = "verifies_back"
+outgoing = "verifies"
+
+[needs.links.affects]
+incoming = "affected_by"
+outgoing = "affects"
+
+[needs.links.motivates]
+incoming = "motivated_by"
+outgoing = "motivates"
+
+[needs.links.mitigates]
+incoming = "mitigated_by"
+outgoing = "mitigates"
+
+# --- CODELINKS (consumed by `ubc build`) ---
+# Two projects, one per arm of the lower V — SYMMETRIC: each scans a source tree for
+# ONE-LINE need markers (`get_oneline_needs = true`) and MATERIALISES a real need
+# from each. Neither back-attaches a ref URL; both author needs.
+#
+# - `code` (the implementation arm) scans the production source for
+#   `# @<title>, <IMPL_ID>, impl, [<ARCH_ID>]` markers. The marker's link field is
+#   named `implements` (not the default `links`) so the `implements`-keyed trace gate
+#   sees it.
+#
+# - `tests` (the verification arm) scans the test source for
+#   `# @<title>, <TEST_ID>, test, [<ARCH_ID>]` markers. The marker's link field is
+#   named `verifies` so the `verifies`-keyed trace gate sees it.
+#
+# One-line needs ONLY materialise where a `.. src-trace:: :project: <name>` directive
+# appears in a built RST file (a config-only `[codelinks]` block creates none), so
+# each stage authors that directive in its route's RST alongside the markers.
+
+[codelinks]
+set_local_url = true
+
+# The implementation-arm project. `get_oneline_needs = true` materialises an `impl`
+# need from each one-line marker in the production source; `get_need_id_refs` and
+# `get_rst` stay off because this project's job is authoring `impl` needs, not
+# back-attaching ref URLs or extracting RST blocks.
+[codelinks.projects.code.source_discover]
+src_dir = "src"
+comment_type = "python"
+
+[codelinks.projects.code.analyse]
+get_oneline_needs = true
+get_need_id_refs = false
+get_rst = false
+
+# The one-line marker grammar: `# @<title>, <IMPL_ID>, impl, [<ARCH_ID>]`. The
+# fourth field is NAMED `implements` (a `list[str]` link) so the materialised `impl`
+# need carries an outgoing `implements` link — the link the `code` stage's trace edge
+# counts. `implements` is declared in `[needs.links]` above, so it resolves to a real
+# link instead of being silently dropped.
+[codelinks.projects.code.analyse.oneline_comment_style]
+field_split_char = ","
+needs_fields = [
+  { name = "title", type = "str" },
+  { name = "id", type = "str" },
+  { name = "type", type = "str", default = "impl" },
+  { name = "implements", type = "list[str]", default = [
+  ] },
+]
+
+# The verification-arm project. `get_oneline_needs = true` materialises a `test`
+# need from each one-line marker in the test source; `get_need_id_refs` and
+# `get_rst` stay off because this project's job is authoring `test` needs, not
+# back-attaching ref URLs or extracting RST blocks.
+[codelinks.projects.tests.source_discover]
+src_dir = "tests"
+comment_type = "python"
+
+[codelinks.projects.tests.analyse]
+get_oneline_needs = true
+get_need_id_refs = false
+get_rst = false
+
+# The one-line marker grammar: `# @<title>, <TEST_ID>, test, [<ARCH_ID>]`. The
+# fourth field is NAMED `verifies` (a `list[str]` link) so the materialised `test`
+# need carries an outgoing `verifies` link — the link the `tests` stage's trace edge
+# counts. `verifies` is declared in `[needs.links]` above, so it resolves to a real
+# link instead of being silently dropped.
+[codelinks.projects.tests.analyse.oneline_comment_style]
+field_split_char = ","
+needs_fields = [
+  { name = "title", type = "str" },
+  { name = "id", type = "str" },
+  { name = "type", type = "str", default = "test" },
+  { name = "verifies", type = "list[str]", default = [
+  ] },
+]
+
+# --- AGENT RUNNER (consumed by `ubc agent run`) ---
+# `ubc agent run` spawns an AI runner to author the next-stage artefact. The
+# prompt (recommended skill + the anchor need's context briefing + the resolved
+# authoring route) is passed on the runner's stdin.
+#
+# There is NO default runner: this preset ships none, so `ubc agent run` reports
+# "no runner configured" until you set one, rather than committing every project
+# to a specific tool. Configure a runner by uncommenting the [agent.runner] table
+# below, or set the UBC_AGENT_RUNNER / UBC_AGENT_RUNNER_MODEL / UBC_AGENT_RUNNER_TIMEOUT
+# env vars, which take precedence over the table.
+#
+# `command` is the shell-less argv lead of a headless coding agent that can write
+# files. `model` pins a model (e.g. "sonnet" for routine authoring). `timeout_secs`
+# bounds one headless pass: a wedged runner that does not exit within the budget is
+# killed (default 600s = 10min, 0 disables the bound). Example:
+#
+# [agent.runner]
+# command = "claude -p --permission-mode acceptEdits --output-format stream-json --verbose"
+# model = "sonnet"
+# timeout_secs = 600
+
+# --- WORKFLOW (consumed by `ubc agent next` / `status` / `gaps`) ---
+# The COMPLETE V-model process:
+#   - the decomposition arm runs the need-producing stages
+#     `user_stories -> reqs -> archs` (each produces one type and traces up to its
+#     parent);
+#   - the implementation arm runs one `code` stage that produces an `impl` need (a
+#     one-line marker in the production source materialises it) which
+#     `implements`-links the arch it realises. The stage's bidirectional `implements`
+#     trace edge counts the arch's incoming `implements_back`;
+#   - the verification arm runs one `tests` stage that produces a `test` need (a
+#     one-line marker in the test source materialises it) which `verifies`-links the
+#     arch it covers. The stage's bidirectional `verifies` trace edge counts the
+#     arch's incoming `verifies_back`,
+# so every arch is both implemented AND verified.
+
+# The spec needs (user_story, req, arch) are exempt from the orphan gate: they are
+# decomposition artefacts, gated by their own trace edges, not by code coverage.
+# `impl` and `test` are NOT exempt — they must trace UP to the arch they cover.
+[workflow]
+orphan_exempt_types = ["user_story", "req", "arch"]
+
+# The diagram SYNTAX the runner authors any diagram in. `format` is the authoring
+# directive injected into the runner prompt ("author it as a `mermaid` directive");
+# it is project policy, NOT baked into the (generic) skills. `enabled = false`
+# keeps the diagram GATE off — only the authoring format is configured here.
+[workflow.diagram]
+enabled = false
+format = "mermaid"
+
+[[workflow.stages]]
+id = "user_stories"
+produces = "user_story"
+review_skill = "review-feat"
+
+[workflow.stages.route]
+granularity = "per-root"
+path = "specs/{stream}/user_stories.rst"
+scope = "stream"
+
+[[workflow.stages]]
+author_skill = "draft-requirement"
+authoring = "Decompose the use case into the complete set of requirements it implies — the happy path, the error and edge cases, and the relevant non-functional constraints."
+depends_on = ["user_stories"]
+id = "reqs"
+produces = "req"
+review_skill = "review-requirement"
+
+[workflow.stages.route]
+granularity = "per-root"
+path = "specs/{stream}/requirements.rst"
+scope = "stream"
+
+[[workflow.stages.trace]]
+direction = "both"
+link = "traces_to"
+min = 1
+up = "user_story"
+
+[[workflow.stages]]
+author_skill = "draft-arch"
+authoring = "Produce the architecture elements the requirements need (one per distinct responsibility, enough that every requirement is satisfied by at least one element), plus a component diagram showing how they relate."
+depends_on = ["reqs"]
+id = "archs"
+produces = "arch"
+review_skill = "review-arch"
+
+[workflow.stages.route]
+granularity = "per-root"
+path = "specs/{stream}/architecture.rst"
+scope = "stream"
+
+[[workflow.stages.trace]]
+direction = "both"
+link = "satisfies"
+min = 1
+up = "req"
+
+# --- CODE STAGE (the implementation arm) ---
+# This stage PRODUCES an `impl` need authored as a one-line codelinks marker in the
+# production source (`# @<title>, <IMPL_ID>, impl, [<ARCH_ID>]`), which
+# `implements`-links the arch it realises. The bidirectional `implements` trace edge
+# UP to `arch` drives coverage: it counts every arch's incoming `implements_back`, so
+# an arch with no implementing element fails the gate and the stage stays `ready`
+# until an impl covers it. Coverage is the TRACE EDGE, not `require_incoming` — the
+# trace edge attributes the gap to THIS impl-producing stage (so `next` returns
+# `code`), whereas `require_incoming` would mis-attribute it to the arch's own stage
+# and no-op `next`. SYMMETRIC to the `tests` stage below.
+[[workflow.stages]]
+author_skill = "draft-impl"
+authoring = "Author one implementation need per architecture element as a one-line marker in the production source, each implementing the arch it realises, so every arch carries an incoming implements link. Put real production code beneath each marker."
+depends_on = ["archs"]
+id = "code"
+produces = "impl"
+
+[workflow.stages.route]
+granularity = "global"
+path = "src"
+scope = "global"
+
+[[workflow.stages.trace]]
+direction = "both"
+link = "implements"
+min = 1
+up = "arch"
+
+# --- TESTS STAGE (the verification arm) ---
+# This stage PRODUCES a `test` need authored as a one-line codelinks marker in the
+# test source (`# @<title>, <TEST_ID>, test, [<ARCH_ID>]`), which `verifies`-links
+# the arch it covers. The bidirectional `verifies` trace edge UP to `arch` drives
+# coverage: it counts every arch's incoming `verifies_back`, so an arch with no
+# verifying test fails the gate and the stage stays `ready` until a test covers it.
+# Coverage is the TRACE EDGE, not `require_incoming` — the trace edge attributes the
+# gap to THIS test-producing stage (so `next` returns `tests`), whereas
+# `require_incoming` would mis-attribute it to the arch's own stage and no-op `next`.
+[[workflow.stages]]
+author_skill = "draft-test"
+authoring = "Author one test need per architecture element as a one-line marker in the test source, each verifying the arch it covers, so every arch carries an incoming verifies link."
+depends_on = ["code"]
+id = "tests"
+produces = "test"
+
+[workflow.stages.route]
+granularity = "global"
+path = "tests"
+scope = "global"
+
+[[workflow.stages.trace]]
+direction = "both"
+link = "verifies"
+min = 1
+up = "arch"
+
+[[workflow.stages]]
+id = "risks"
+optional = true
+produces = "risk"
+
+[workflow.stages.route]
+granularity = "single"
+path = "specs/_global/risks.rst"
+scope = "global"
+
+[[workflow.stages]]
+author_skill = "record-decision"
+id = "decisions"
+optional = true
+produces = "decision"
+review_skill = "review-decision"
+
+[workflow.stages.route]
+granularity = "single"
+path = "specs/_global/decisions.rst"
+scope = "global"
+
+# --- QUALITY ANALYSIS (consumed by `ubc agent review-brief` / `verdict-check`) ---
+# The substance gate's rubric lives as DATA, not review-skill prose: each
+# reviewed type below is wired to a per-type CRITERIA PACK — installed
+# alongside this config at `quality/<name>.toml` — that supplies the axes
+# (description + scoring_guide) a review brief surfaces. This keeps the
+# review skills interface-agnostic ("score every axis your briefing's
+# `criteria` names") and lets the rubric be tuned without touching a skill.
+#
+# One entry per type a review-carrying stage `produces` above: `req` (reqs,
+# review-requirement), `arch` (archs, review-arch), `user_story`
+# (user_stories, review-feat), and `decision` (decisions, review-decision).
+# `impl` / `test` / `risk` carry no `review_skill` and so need no pack.
+[quality]
+enabled = true
+
+[quality.type_configs.req]
+criteria_file = "quality/requirement.toml"
+
+[quality.type_configs.arch]
+criteria_file = "quality/arch.toml"
+
+[quality.type_configs.user_story]
+criteria_file = "quality/feat.toml"
+
+[quality.type_configs.decision]
+criteria_file = "quality/decision.toml"
+
+# A couple of gentle per-axis floors — deliberately light. `parent_fit` is
+# shared by the requirement/arch/feat packs (absent
+# from the decision pack, where it is silently a no-op); `context_present`
+# floors the decision pack's most fundamental axis directly.
+[quality.required]
+parent_fit = 1
+
+[quality.type_configs.decision.required]
+context_present = 1

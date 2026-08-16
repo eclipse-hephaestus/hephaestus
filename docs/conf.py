@@ -47,6 +47,12 @@ html_theme = "furo"
 # as plain text in Furo's own sidebar.
 html_theme_options = {"sidebar_hide_name": True}
 
+# Furo's footer shows "Last updated on <date>" when this is set. Sphinx
+# computes it once per build run (not per source file mtime), in UTC, so
+# every page shows the same real build timestamp.
+html_last_updated_fmt = "%Y-%m-%d %H:%M UTC"
+html_last_updated_use_utc = True
+
 _shared_nav = hi.shared_nav_html_config(REPO_ROOT)
 html_static_path = _shared_nav["html_static_path"]
 html_css_files = _shared_nav["html_css_files"] + [

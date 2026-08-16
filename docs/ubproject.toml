@@ -8,6 +8,15 @@ version = "0.1.0"
 # Skip framework-internal directories so they are not parsed as needs.
 extend_exclude = [".specify"]
 
+# Parse both RST and Markdown files in ubCode (parser mode).
+# IMPORTANT: In parser mode, declaring only md would drop rst discovery,
+# so we declare both parsers explicitly.
+[parse.parsers.rst]
+
+[parse.parsers.md]
+flavour = "myst"
+include = ["*.md"]
+
 [needs]
 id_required = true
 id_regex = "^[A-Z]+_[A-Z][A-Z0-9_]*$"

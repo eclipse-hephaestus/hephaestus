@@ -8,7 +8,7 @@ tests, tracked with
 ## Deployment Requirements
 
 ```{req} Support GitHub Pages deployment
-:id: REQ_001
+:id: REQ_GITHUB_PAGES_DEPLOYMENT
 :status: open
 :tags: deployment
 
@@ -17,10 +17,10 @@ combined build artifact covering the marketing site, the general
 documentation, and the requirements/traceability docs.
 ```
 
-```{spec} Merge Sphinx output under /docs/
-:id: SPEC_001
+```{arch} Merge Sphinx output under /docs/
+:id: ARCH_MERGE_SPHINX_UNDER_DOCS
 :status: open
-:links: REQ_001
+:satisfies: REQ_GITHUB_PAGES_DEPLOYMENT
 :tags: deployment
 
 The single `docs/` Sphinx build (general docs + this nested `requirements/`
@@ -30,9 +30,9 @@ Requirements live at the nested `/docs/requirements/`.
 ```
 
 ```{impl} CI workflow build order
-:id: IMPL_001
+:id: IMPL_CI_BUILD_ORDER
 :status: open
-:links: SPEC_001
+:implements: ARCH_MERGE_SPHINX_UNDER_DOCS
 :tags: deployment
 
 Implemented in `.github/workflows/pages.yml`: Hugo build → generate
@@ -41,9 +41,9 @@ Sphinx build (consumes the inventory via intersphinx) → merge → upload.
 ```
 
 ```{test} Pages artifact contains all three sites
-:id: TEST_001
+:id: TEST_PAGES_ARTIFACT_CONTAINS_ALL_SITES
 :status: open
-:links: IMPL_001
+:verifies: ARCH_MERGE_SPHINX_UNDER_DOCS
 :tags: deployment
 
 Verify `public/index.html`, `public/docs/docs/index.html`, and

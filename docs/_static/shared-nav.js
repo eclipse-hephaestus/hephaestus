@@ -2,14 +2,22 @@
 // markup 1:1 (same classes, logo, nav links, CTA button), styled by the
 // matching rules in shared-nav.css. Sourced from nav.json (generated from
 // Hugo's index.json by scripts/hugo_json_to_objects_inv.py). Works from any
-// page depth via Sphinx's DOCUMENTATION_OPTIONS.URL_ROOT. Fails silently if
+// page depth/nesting by resolving the root path from this script's own
+// (already depth-relativized by Sphinx) <script src>, rather than Sphinx's
+// now-removed DOCUMENTATION_OPTIONS.URL_ROOT global. Fails silently if
 // nav.json is missing (e.g. a standalone `sphinx-build` without the full
 // pipeline).
 (function () {
   "use strict";
 
-  var urlRoot =
-    (window.DOCUMENTATION_OPTIONS && window.DOCUMENTATION_OPTIONS.URL_ROOT) || "./";
+  var urlRoot = (function () {
+    var script =
+      document.currentScript || document.querySelector('script[src*="shared-nav.js"]');
+    if (!script) {
+      return "./";
+    }
+    return script.src.replace(/_static\/shared-nav\.js(\?.*)?$/, "");
+  })();
 
   loadFont();
 

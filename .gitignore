@@ -25,9 +25,9 @@ Thumbs.db
 node_modules/
 npm-debug.log*
 
-# Sphinx-needs requirements build output + generated cross-linking artifacts
-/requirements/_build/
-/requirements/_extra/
+# Sphinx build output + generated cross-linking artifacts
+/docs/_build/
+/docs/_extra/
 /hugo-objects.inv
 .venv/
 __pycache__/

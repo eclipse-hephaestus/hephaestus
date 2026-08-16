@@ -10,7 +10,7 @@
 # *
 # * SPDX-License-Identifier: Apache-2.0
 # ********************************************************************************
-name: Build and deploy Hugo + requirements sites to GitHub Pages
+name: Build and deploy Hugo + Sphinx sites to GitHub Pages
 
 on:
   push:
@@ -60,8 +60,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install requirements/ build dependencies
-        run: pip install -r requirements/requirements.txt
+      - name: Install Sphinx build dependencies
+        run: pip install -r scripts/requirements.txt
+
+      # needflow diagrams use the graphviz engine (docs/conf.py's
+      # needs_flow_engine), which needs the `dot` binary.
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
 
       # 1) Hugo builds first: its public/index.json page inventory is the
       #    input for the Sphinx-side objects.inv generator below.
@@ -74,21 +79,24 @@ jobs:
       #    after Hugo, before Sphinx.
       - name: Generate Hugo objects.inv + nav.json
         run: |
-          python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv requirements/_extra/nav.json
+          python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv docs/_extra/nav.json
 
-      # 3) Sphinx-needs build consumes hugo-objects.inv via intersphinx_mapping
-      #    (requirements/conf.py) so `hugo:` cross-references resolve.
-      - name: Build requirements (sphinx-needs) site
+      # 3) docs/ (general docs + nested requirements/ sphinx-needs section)
+      #    consumes hugo-objects.inv via intersphinx_mapping (docs/conf.py)
+      #    so `hugo:` cross-references resolve.
+      - name: Build docs (Sphinx) site
         env:
           HUGO_BASE_URL: ${{ steps.pages.outputs.base_url }}/
         run: |
-          python -m sphinx -b html requirements requirements/_build/html -W
+          python -m sphinx -b html docs docs/_build/html -W
 
       # 4) Merge: ship both builds in a single Pages artifact under one origin.
-      - name: Merge requirements site into public/
+      #    Hugo no longer has a content/docs/ page — /docs/ (and its nested
+      #    /docs/requirements/) is served entirely by this Sphinx build.
+      - name: Merge docs site into public/
         run: |
-          mkdir -p public/requirements
-          cp -r requirements/_build/html/. public/requirements/
+          mkdir -p public/docs
+          cp -r docs/_build/html/. public/docs/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

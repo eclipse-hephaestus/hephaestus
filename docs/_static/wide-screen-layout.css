@@ -1,0 +1,36 @@
+/* Furo caps the readable content column (.content) at a fixed 46em by
+   default, only relaxing it to 100% of its own accord at narrow/mobile
+   widths (<=48em). Its .sidebar-drawer/.toc-drawer widths and visibility
+   also change at several of its own breakpoints (e.g. the toc drawer
+   toggles hidden/visible at 82em, with a different sidebar-width formula
+   on each side of that point).
+   Rather than pick our own breakpoint (which will inevitably misalign
+   with one of Furo's and cause the available width to jump inconsistently
+   while resizing), just make .content always fill whatever space its flex
+   container (.main) actually allocates it, at every width.
+
+   .content is a flex item nested two levels deep (.page > .main > .content,
+   each a flex container/item). Sizing it via `width: 100%` resolves that
+   percentage against the parent's computed size, which is exactly where
+   Safari/WebKit has long-standing nested-flexbox bugs that Chrome is more
+   lenient about, so flex-grow is used instead of a percentage width.
+
+   flex-grow alone isn't enough though: .sidebar-drawer/.toc-drawer don't
+   declare flex-shrink:0, so when .content asks to grow into all available
+   space, it's genuinely ambiguous how much of that growth should come from
+   truly-unused space vs. shrinking the two fixed-width columns - and Safari
+   resolves that ambiguity differently than Chrome, squeezing the toc-drawer
+   text into an unreadably narrow column instead of just taking the unused
+   space. Pinning both columns to flex-shrink:0 removes the ambiguity
+   entirely: they stay exactly their specified width in every browser, and
+   .content only ever grows into space that isn't already spoken for. */
+.content {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+.sidebar-drawer,
+.toc-drawer {
+  flex-shrink: 0;
+}

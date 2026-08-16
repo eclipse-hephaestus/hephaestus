@@ -1,7 +1,7 @@
 {{- /*
   Site inventory: page list (for the Sphinx-side objects.inv generator) and
   main nav (for the shared top-nav bar rendered on both Hugo and Sphinx pages).
-  See scripts/hugo_json_to_objects_inv.py and requirements/_static/shared-nav.js.
+  See scripts/hugo_json_to_objects_inv.py and docs/_static/shared-nav.js.
 */ -}}
 {{- $pages := slice -}}
 {{- $homePrefix := .Site.Home.RelPermalink -}}

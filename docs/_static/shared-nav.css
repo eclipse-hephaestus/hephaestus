@@ -8,6 +8,16 @@
    properties, to avoid leaking `:root` variables into the rest of the page.
    Keep in sync with ../../static/css/hephaestus.css if that changes. */
 
+/* Single source of truth for the header's rendered height (74px min-height
+   on .nav-wrap below + 1px border-bottom) - referenced by
+   wide-screen-layout.css so Furo's sidebar/toc drawers start below the
+   header instead of extending behind it (they're position:fixed;top:0 by
+   default, with no awareness that this header exists at all). Defined on
+   :root, not .site-header, so non-descendant elements can read it too. */
+:root {
+  --hephaestus-header-height: 75px;
+}
+
 .site-header,
 .site-header * {
   box-sizing: border-box;

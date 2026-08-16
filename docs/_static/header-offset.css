@@ -1,0 +1,41 @@
+/* On desktop widths, .sidebar-drawer/.toc-drawer (the <aside>/outer wrapper)
+   are NORMAL flex items in .page's layout, position:static - they only
+   become position:fixed inside @media(max-width:63em), i.e. narrow/mobile
+   screens. The element that actually stays pinned while scrolling on
+   desktop is their inner child, .sidebar-sticky/.toc-sticky:
+
+     .sidebar-sticky, .toc-sticky {
+       position: sticky;
+       top: 0;
+       height: 100vh;
+     }
+
+   This uses the exact same mechanism as our own .site-header
+   (position: sticky; top: 0) - and both are trying to stick to the same
+   spot. Furo has no concept of our header at all (pure custom JS/CSS
+   sitting outside Furo's layout), so .sidebar-sticky/.toc-sticky have
+   always stuck at the very top of the viewport, competing with - and,
+   since they come later in the DOM, painting over - our header. Pushing
+   them down + shrinking their height (below) fixes that part. */
+.sidebar-sticky,
+.toc-sticky {
+  top: var(--hephaestus-header-height, 75px);
+  height: calc(100vh - var(--hephaestus-header-height, 75px));
+  z-index: 10;
+}
+
+/* This alone isn't enough, though. Furo also sets a flat, unconditional
+   `.sidebar-drawer{z-index:30}` / `.toc-drawer{z-index:50}` rule. Normally
+   z-index is ignored on position:static elements - but flex items are a
+   documented exception: a flex item's z-index creates a stacking context
+   *even when its position is static* (CSS Flexible Box Layout spec). Since
+   .sidebar-drawer/.toc-drawer are flex items of .page, that exception
+   applies, and they paint at z-index 30/50 - above our header's z-index 20
+   - despite being position:static. Their (mostly empty, background-only)
+   box is tall and moves with the page in normal flow, so as it scrolls,
+   that background slides up and over the header. Bring both down below
+   the header's level too. */
+.sidebar-drawer,
+.toc-drawer {
+  z-index: 10;
+}

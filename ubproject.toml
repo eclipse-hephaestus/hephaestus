@@ -1,7 +1,7 @@
 "$schema" = "https://ubcode.useblocks.com/ubproject.schema.json"
 
 [project]
-name = "agentic-project"
+name = "Eclipse SDV Hephaestus"
 version = "0.1.0"
 
 [source]
@@ -19,7 +19,7 @@ include = ["*.md"]
 
 [needs]
 id_required = true
-id_regex = "^[A-Z]+_[A-Z][A-Z0-9_]*$"
+id_regex = "^[A-Z]+_[A-Z]*$"
 build_json = true
 flow_engine = "graphviz"
 
@@ -259,14 +259,16 @@ enabled = false
 format = "mermaid"
 
 [[workflow.stages]]
+author_skill = "draft-feat"
+authoring = "Turn each capability the user describes — a single idea or a whole list of them — into its own use case, splitting any input item that bundles more than one independently-shippable capability."
 id = "user_stories"
 produces = "user_story"
 review_skill = "review-feat"
 
 [workflow.stages.route]
-granularity = "per-root"
-path = "specs/{stream}/user_stories.rst"
-scope = "stream"
+granularity = "single"
+path = "docs/requirements/index.md"
+scope = "global"
 
 [[workflow.stages]]
 author_skill = "draft-requirement"
@@ -278,7 +280,7 @@ review_skill = "review-requirement"
 
 [workflow.stages.route]
 granularity = "per-root"
-path = "specs/{stream}/requirements.rst"
+path = "docs/requirements/index.md"
 scope = "stream"
 
 [[workflow.stages.trace]]
@@ -297,7 +299,7 @@ review_skill = "review-arch"
 
 [workflow.stages.route]
 granularity = "per-root"
-path = "specs/{stream}/architecture.rst"
+path = "docs/requirements/index.md"
 scope = "stream"
 
 [[workflow.stages.trace]]

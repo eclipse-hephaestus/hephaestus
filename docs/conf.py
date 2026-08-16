@@ -34,20 +34,8 @@ myst_enable_extensions = ["colon_fence"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- sphinx-needs (used under requirements/) ----------------------------------
-needs_types = [
-    dict(directive="req", title="Requirement", prefix="REQ_", color="#BFD8D2", style="node"),
-    dict(directive="spec", title="Specification", prefix="SPEC_", color="#FEDCD2", style="node"),
-    dict(directive="impl", title="Implementation", prefix="IMPL_", color="#DF744A", style="node"),
-    dict(directive="test", title="Test Case", prefix="TEST_", color="#DCB239", style="node"),
-]
-needs_id_required = True
-# Exported to <outdir>/needs.json — usable by external tooling, or by
-# needs_external_needs if another sphinx-needs project is ever added.
-needs_build_json = True
-# needflow defaults to the "plantuml" engine (needs a Java + PlantUML
-# toolchain we don't have); use graphviz instead, which is a plain `dot`
-# binary and already required for the diagrams we build.
-needs_flow_engine = "graphviz"
+# Load Sphinx-Needs settings from ubproject.toml ([needs] table).
+needs_from_toml = "ubproject.toml"
 
 # -- intersphinx: link into the Hugo marketing site ---------------------------
 intersphinx_mapping = {}

@@ -19,7 +19,7 @@ include = ["*.md"]
 
 [needs]
 id_required = true
-id_regex = "^[A-Z]+_[A-Z]*$"
+id_regex = "^[A-Z]+_[A-Z][A-Z0-9_]*$"
 build_json = true
 flow_engine = "graphviz"
 

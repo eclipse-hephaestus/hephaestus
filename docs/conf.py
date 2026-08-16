@@ -34,8 +34,9 @@ myst_enable_extensions = ["colon_fence"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- sphinx-needs (used under requirements/) ----------------------------------
-# Load Sphinx-Needs settings from ubproject.toml ([needs] table).
-needs_from_toml = "ubproject.toml"
+# Load Sphinx-Needs settings from ubproject.toml ([needs] table). ubproject.toml
+# lives at the repo root, not next to conf.py.
+needs_from_toml = str(REPO_ROOT / "ubproject.toml")
 
 # -- intersphinx: link into the Hugo marketing site ---------------------------
 intersphinx_mapping = {}

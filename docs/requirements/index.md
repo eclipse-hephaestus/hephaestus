@@ -154,7 +154,9 @@ it.
 ## Installation
 
 You can install `ubcode` which includes `ubc` from the Visual Studio Code
-Market place. ubcode does not need a licence if it is used on a open source repo. You should configure your LLM to use the AI skills.
+Market place. ubcode does not need a licence if it is used on an open source
+repo. Configure your LLM to use the AI skills described in the Pharaoh
+section below.
 
 ## ubcode: the traceability engine
 
@@ -162,24 +164,26 @@ Market place. ubcode does not need a licence if it is used on a open source repo
 [`ubproject.toml`](https://github.com/eclipse-hephaestus/hephaestus/blob/main/ubproject.toml)
 at the repo root.
 
-You can see the workflow via `Pharaoh` in `Tailer workflow`, deatils in the next chapter.
+You can see the workflow via `Pharaoh` in `Tailor workflow`, details in the next chapter.
 
 ## Pharaoh: AI-assisted authoring and review
 
 ![ubcode](ubcode.png)
 
 In `Pharaoh Agent`
-- you can configure you LLM.
+
+- you can configure your LLM.
 
 In `Pharaoh Workflow`
 
 - you can add new use cases with `Capture intent`
-- you can check the AI Workflow with `Tailer workflow`
+- you can check the AI Workflow with `Tailor workflow`
 - you can navigate to the current elements by selecting the navigation button ![ubcode-navigation](ubcode-navi.png) for each of them.
-- you can procced with the AI driven element generation by driving the next step or copy the next LLM commands ![ubcode-drive-llm](ubcode-drive-copy.png)
+- you can proceed with the AI driven element generation by driving the next step or copy the next LLM commands ![ubcode-drive-llm](ubcode-drive-copy.png)
 
 In `Pharaoh Gaps`
-- You can check on open topics, found issues.
+
+- you can check on open topics and found issues.
 
 Every need traces to its parent (`traces_to`, `satisfies`, `implements`,
 `verifies`), and `impl` / `test` needs aren't written by hand here — they're

@@ -22,6 +22,9 @@ id_required = true
 id_regex = "^[A-Z]+_[A-Z][A-Z0-9_]*$"
 build_json = true
 flow_engine = "graphviz"
+# Sphinx-Needs truncates {need} role titles to 30 chars by default; disable
+# truncation so inline need references always render the full title.
+role_need_max_title_length = -1
 
 # This profile ships the COMPLETE V-model, authored SYMMETRICALLY across both arms
 # of the lower V as NEEDS-IN-SOURCE:

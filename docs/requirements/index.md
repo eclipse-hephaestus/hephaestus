@@ -144,4 +144,68 @@ harmonized build.
 
 # How we work
 
+This page is not hand-written prose — every user story and requirement above
+is a [sphinx-needs](https://sphinx-needs.readthedocs.io/) `{need}` directive,
+traced from use case down to requirement, architecture, implementation, and
+test. The trace graph is authored and gated with two tools: **ubcode**, the
+traceability engine, and **Pharaoh**, the AI-agent workflow built on top of
+it.
+
+## Installation
+
+You can install `ubcode` which includes `ubc` from the Visual Studio Code
+Market place. ubcode does not need a licence if it is used on a open source repo. You should configure your LLM to use the AI skills.
+
+## ubcode: the traceability engine
+
+`ubcode` (CLI: `ubc`) defines the V-model this project follows, configured in
+[`ubproject.toml`](https://github.com/eclipse-hephaestus/hephaestus/blob/main/ubproject.toml)
+at the repo root.
+
+You can see the workflow via `Pharaoh` in `Tailer workflow`, deatils in the next chapter.
+
+## Pharaoh: AI-assisted authoring and review
+
+![ubcode](ubcode.png)
+
+In `Pharaoh Agent`
+- you can configure you LLM.
+
+In `Pharaoh Workflow`
+
+- you can add new use cases with `Capture intent`
+- you can check the AI Workflow with `Tailer workflow`
+- you can navigate to the current elements by selecting the navigation button ![ubcode-navigation](ubcode-navi.png) for each of them.
+- you can procced with the AI driven element generation by driving the next step or copy the next LLM commands ![ubcode-drive-llm](ubcode-drive-copy.png)
+
+In `Pharaoh Gaps`
+- You can check on open topics, found issues.
+
+Every need traces to its parent (`traces_to`, `satisfies`, `implements`,
+`verifies`), and `impl` / `test` needs aren't written by hand here — they're
+materialized from one-line marker comments in `src/` and `tests/` that link
+back to the architecture element they realize or verify.
+
+Pharaoh is the agentic layer that drives this graph stage by stage with AI
+coding assistants (Claude Code, GitHub Copilot). Its state lives in
+`.pharaoh/`: an install manifest tracking which skill files were installed
+for which assistant, and `.pharaoh/verdicts/` holding independent AI-review
+verdicts for each authored need.
+
+To advance the workflow one stage:
+
+1. Run `/drive-workflow` (Claude Code) — it calls `ubc agent next` to find
+   the next stage, authors it with the matching `draft-*` skill after you
+   approve an outline, then hands the result to a fresh reviewer context
+   using the matching `review-*` skill.
+2. The reviewer scores the need against the criteria in `quality/*.toml` and
+   submits a verdict via `ubc agent verdict-submit`, written to
+   `.pharaoh/verdicts/<NEED_ID>.json`.
+3. `drive-workflow` confirms `ubc agent gaps` is clear and the verdict is
+   fresh, reports what's next, and **stops** — it advances exactly one stage
+   at a time so a human stays in the loop.
+
+`ubc agent verdict-check` (or `ubc agent release-check --with-verdicts`)
+gates a release on both the structural trace graph and these review
+verdicts being present and un-stale.
 

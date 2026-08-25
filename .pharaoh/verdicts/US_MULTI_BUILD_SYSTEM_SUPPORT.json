@@ -1,0 +1,34 @@
+{
+  "agent": "vscode-lm",
+  "axes": {
+    "naming_clarity": {
+      "reason": "The title and most of the body use understandable stakeholder terms like \"Support for multi build systems\" and \"Contributors keep using their build and dependency tooling,\" but the reference \"{need}`US_BAZEL_HARMONIZED_BUILD`\" is technical shorthand a non-implementer may not confirm directly.",
+      "score": 1,
+      "suggestion": "Replace or supplement \"{need}`US_BAZEL_HARMONIZED_BUILD`\" with a plain-language label (e.g., \"the Bazel-aligned shared build process\") so the statement is fully understandable without internal ID knowledge."
+    },
+    "no_mechanism_leak": {
+      "reason": "The body leaks implementation by naming specific technology choices in \"Cargo\" and \"US_BAZEL_HARMONIZED_BUILD\".",
+      "score": 0,
+      "suggestion": "Replace tool names with outcome-focused language, e.g., \"Contributors can continue using their existing build and dependency workflows alongside the harmonized project build process.\""
+    },
+    "parent_fit": {
+      "reason": "Because there are \"No parent needs,\" this need is treated as the root and Parent Fit is fully met by default under the criterion.",
+      "score": 2
+    },
+    "single_user_capability": {
+      "reason": "It states a single user-facing capability—contributors can \"keep using their build and dependency tooling, such as Cargo, alongside ... US_BAZEL_HARMONIZED_BUILD\"—which is one cohesive interoperability outcome.",
+      "score": 2
+    },
+    "user_observable": {
+      "reason": "The phrase \"Contributors keep using their build and dependency tooling, such as Cargo\" is user-observable in workflow, but \"alongside {need}`US_BAZEL_HARMONIZED_BUILD`\" relies on internal referencing that obscures the visible outcome.",
+      "score": 1,
+      "suggestion": "Rewrite it as a direct observable behavior, e.g., \"Contributors can continue running Cargo commands for build and dependency management while also using the Bazel-based build workflow without losing existing functionality.\""
+    }
+  },
+  "criteria": "feat",
+  "criteria_fingerprint": "bb61c1a1cf63adcf67ee69adf932c3812909a595fa4b3037b66f097932231afe",
+  "model": "auto",
+  "need": "US_MULTI_BUILD_SYSTEM_SUPPORT",
+  "reviewed_fingerprint": "31833dd8178cacb43c3b1a35236b96b81b9aef1148c0f91336ce9e0843d6caaf",
+  "schema": 2
+}

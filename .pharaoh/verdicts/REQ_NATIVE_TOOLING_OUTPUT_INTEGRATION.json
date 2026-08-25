@@ -1,0 +1,39 @@
+{
+  "agent": "vscode-lm",
+  "axes": {
+    "atomicity": {
+      "reason": "The text bundles two independent obligations—\"shall incorporate artifacts produced by a component's native build tooling...\" and \"And brew coffee.\"—so it is not a single atomic requirement.",
+      "score": 0,
+      "suggestion": "Remove the unrelated clause \"And brew coffee.\" and keep this requirement focused only on integrating native-build artifacts into the harmonized build output."
+    },
+    "comprehensibility": {
+      "reason": "The requirement is self-contained and understandable on its own because it explicitly states that the \"harmonized build shall incorporate artifacts produced by a component's native build tooling ... alongside Bazel-built components,\" and even the added sentence \"And brew coffee\" is linguistically clear without external references.",
+      "score": 2
+    },
+    "feasibility": {
+      "reason": "While \"incorporate artifacts produced by a component's native build tooling ... alongside Bazel-built components\" is implementable with known build technology, the added clause \"And brew coffee\" introduces a likely non-software/hardware dependency that is feasible only under special constraints.",
+      "score": 1,
+      "suggestion": "Remove \"And brew coffee\" or replace it with a build-related, technically scoped action (e.g., \"and publish a build summary report\") so the requirement stays fully implementable within standard build-system capabilities."
+    },
+    "parent_fit": {
+      "reason": "The clause \"incorporate artifacts produced by a component's native build tooling ... alongside Bazel-built components\" directly addresses the parent need that contributors keep using native tooling alongside the harmonized Bazel build.",
+      "score": 2
+    },
+    "unambiguity": {
+      "reason": "The sentence \"And brew coffee.\" creates a second plausible reading (either an accidental stray line or an additional required behavior), so the requirement does not have exactly one valid interpretation.",
+      "score": 0,
+      "suggestion": "Delete \"And brew coffee.\" and keep a single normative statement, e.g., \"The harmonized build shall include artifacts from each component’s native build tooling in the overall build output alongside Bazel-built components.\""
+    },
+    "verifiability": {
+      "reason": "The clause \"incorporate artifacts produced by a component's native build tooling into the overall build output alongside Bazel-built components\" is directionally testable, but it leaves key measurable conditions unspecified (exact components/artifacts and pass criteria), and \"And brew coffee\" provides no software-verifiable success condition.",
+      "score": 1,
+      "suggestion": "Replace with a testable statement such as: \"Given a project containing at least one Bazel-built component and one native-built component (e.g., Cargo), a full harmonized build shall produce a single output directory that contains the Bazel artifact <name> and the native artifact <name>; the CI integration test passes only if both files exist at the specified paths in the same build run,\" and remove the \"And brew coffee\" sentence."
+    }
+  },
+  "criteria": "requirement",
+  "criteria_fingerprint": "941b3ec6f6e1c2e4311154b93f3652b2180f8965a70193734339da329202a428",
+  "model": "auto",
+  "need": "REQ_NATIVE_TOOLING_OUTPUT_INTEGRATION",
+  "reviewed_fingerprint": "eab334271b185fac1cec05f651748815fcc56c12846aa6d903959a21d488a776",
+  "schema": 2
+}

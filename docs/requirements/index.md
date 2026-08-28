@@ -105,7 +105,6 @@ The harmonized build shall incorporate artifacts produced by a component's
 native build tooling into the overall build output alongside Bazel-built
 components.
 
-And brew coffee.
 ```
 
 ```{req} Native build failures are reported per component

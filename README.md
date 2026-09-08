@@ -112,13 +112,73 @@ Main pages live under `content/`:
 - `content/_index.md` for the homepage metadata
 - `content/getting-started/_index.md`
 - `content/tooling/_index.md`
-- `content/docs/_index.md`
 - `content/community/_index.md`
 - `content/downloads/_index.md`
 - `content/news/_index.md`
 - `content/faq/_index.md`
 
+(`/docs/` is no longer a Hugo content page — see below.)
+
 Homepage sections are rendered from partials in `layouts/partials/hephaestus/`.
+
+## Sphinx docs (docs/ + nested requirements/)
+
+`/docs/` is a single [Sphinx](https://www.sphinx-doc.org/) project rather
+than Hugo content, published under the same GitHub Pages deployment as the
+Hugo site. It covers both general documentation and, nested under
+`docs/requirements/`, requirements/traceability docs built with
+[sphinx-needs](https://sphinx-needs.readthedocs.io/) (served at
+`/docs/requirements/`) — sphinx-needs has no Hugo equivalent, and general
+docs benefit from Sphinx's `toctree` sidebar, search, and cross-referencing
+as the document tree grows, which Hugo's flat single-page theme doesn't
+give you. Keeping both in one Sphinx project (rather than two) means
+requirements pages show up directly in the docs sidebar, and docs can
+reference specific requirements with a plain internal `{doc}` role instead
+of cross-project intersphinx.
+
+### Local build
+
+```bash
+pip install -r scripts/requirements.txt
+hugo --gc                                    # produces public/index.json
+python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv docs/_extra/nav.json
+python -m sphinx -b html docs docs/_build/html -W
+```
+
+Open `docs/_build/html/index.html`. Skipping the Hugo build/conversion steps
+still produces a working build — `hugo:` cross-references and the shared nav
+bar just won't resolve.
+
+### How the pieces fit together
+
+- **`hugo.toml`** declares a custom `JSON` output format on the home page, so
+  `hugo build` additionally writes `public/index.json` — a machine-readable
+  inventory of every page plus the main menu (see `layouts/index.json.json`).
+- **`scripts/hugo_json_to_objects_inv.py`** turns that inventory into a real
+  Sphinx `objects.inv` (via [`sphobjinv`](https://sphobjinv.readthedocs.io/)),
+  so `docs/conf.py`'s `intersphinx_mapping` can resolve
+  `` {doc}`hugo:<path>` `` references into Hugo pages — the same mechanism
+  Sphinx projects use to link into each other, just pointed at a generated
+  (rather than Sphinx-built) inventory. It also copies the nav portion to
+  `nav.json`, used below. `scripts/hugo_intersphinx.py` is a small shared
+  `conf.py` helper (reusable by any future Sphinx project added under this
+  repo) that wires this up, plus the shared header assets.
+- **`docs/_static/shared-nav.{js,css}`** fetch `nav.json` at runtime and
+  render a header matching the Hugo site's own
+  `layouts/partials/site-header.html` (same classes, logo, CTA button), so
+  navigation looks and behaves the same on both sites without duplicating
+  template logic per theme.
+- **Build order matters and is one-directional**: Hugo → conversion script →
+  `docs/` build. Hugo linking into specific docs/requirements pages is
+  intentionally *not* build-time validated — automating that too would
+  require Sphinx to build before Hugo, creating a real circular dependency.
+  Link to specific pages with plain, stable URLs instead (e.g. the
+  "Requirements" nav entry in `hugo.toml` just points at
+  `/docs/requirements/`).
+- **`.github/workflows/pages.yml`** runs the steps above in order, building
+  Sphinx's output straight into `public/docs/` (rather than `docs/_build/html/`
+  followed by a copy) so the Hugo and Sphinx sites land under one `public/`
+  tree for the single combined Pages artifact upload.
 
 ## Notes
 

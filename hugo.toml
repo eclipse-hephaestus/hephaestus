@@ -25,6 +25,17 @@ relativeURLs = false
   [caches.images]
     dir = ':cacheDir/images'
 
+# Machine-readable site inventory (pages + nav), consumed by the docs/
+# Sphinx project to generate an intersphinx-compatible objects.inv and to
+# render a matching top navigation. See scripts/hugo_json_to_objects_inv.py.
+[outputFormats.JSON]
+  mediaType = "application/json"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "JSON"]
+
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
@@ -70,8 +81,12 @@ relativeURLs = false
     weight = 20
   [[menu.main]]
     name = "Docs"
-    url = "/docs/"
+    url = "/docs/docs/"
     weight = 30
+  [[menu.main]]
+    name = "Requirements"
+    url = "/docs/requirements/"
+    weight = 35
   [[menu.main]]
     name = "Community"
     url = "/community/"

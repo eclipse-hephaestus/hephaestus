@@ -24,3 +24,11 @@ Thumbs.db
 # Node, if added later
 node_modules/
 npm-debug.log*
+
+# Sphinx build output + generated cross-linking artifacts
+/docs/_build/
+/docs/_extra/
+/hugo-objects.inv
+.venv/
+__pycache__/
+*.pyc

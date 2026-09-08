@@ -1,0 +1,110 @@
+/* Header rules copied verbatim (selectors + values) from the Hugo site's
+   static/css/hephaestus.css — .site-header, .nav-wrap, .brand, .main-nav,
+   .btn*, plus the .container it nests in — so the two headers render
+   identically. Deliberately NOT loading the whole hephaestus.css file here:
+   it also carries page-wide resets (body background, global `a` color,
+   hero/footer styles) that would fight the Sphinx theme's own layout and
+   break its dark mode. Colors are inlined rather than reused as CSS custom
+   properties, to avoid leaking `:root` variables into the rest of the page.
+   Keep in sync with ../../static/css/hephaestus.css if that changes. */
+
+/* Single source of truth for the header's rendered height (74px min-height
+   on .nav-wrap below + 1px border-bottom) - referenced by
+   wide-screen-layout.css so Furo's sidebar/toc drawers start below the
+   header instead of extending behind it (they're position:fixed;top:0 by
+   default, with no awareness that this header exists at all). Defined on
+   :root, not .site-header, so non-descendant elements can read it too. */
+:root {
+  --hephaestus-header-height: 75px;
+}
+
+.site-header,
+.site-header * {
+  box-sizing: border-box;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(11, 23, 38, 0.92);
+  color: #fff;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.site-header .container {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.site-header .nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 74px;
+}
+
+.site-header .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.site-header .brand img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.site-header .main-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.site-header .main-nav a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.site-header .main-nav a:hover {
+  color: #fff;
+}
+
+.site-header .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.site-header .btn:hover {
+  transform: translateY(-2px);
+}
+
+.site-header .btn-primary {
+  background: linear-gradient(135deg, #f7941e, #ffb347);
+  color: #111827;
+  box-shadow: 0 14px 35px rgba(247, 148, 30, 0.28);
+}
+
+.site-header .btn-small {
+  min-height: 38px;
+  padding: 0 16px;
+  font-size: 0.9rem;
+}

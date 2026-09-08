@@ -10,7 +10,7 @@
 # *
 # * SPDX-License-Identifier: Apache-2.0
 # ********************************************************************************
-name: Build and deploy Hugo site to GitHub Pages
+name: Build and deploy Hugo + Sphinx sites to GitHub Pages
 
 on:
   push:
@@ -42,6 +42,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          submodules: true
 
       - name: Setup Pages
         id: pages
@@ -54,9 +55,42 @@ jobs:
           tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
           echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
 
-      - name: Build
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Sphinx build dependencies
+        run: pip install -r scripts/requirements.txt
+
+      # needflow diagrams use the graphviz engine (docs/conf.py's
+      # needs_flow_engine), which needs the `dot` binary.
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
+
+      # 1) Hugo builds first: its public/index.json page inventory is the
+      #    input for the Sphinx-side objects.inv generator below.
+      - name: Build Hugo site
         run: |
           hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cacheDir "${{ runner.temp }}/hugo_cache"
+
+      # 2) Generate an intersphinx-compatible objects.inv from Hugo's page
+      #    inventory, plus nav.json for the shared top-nav bar. Must run
+      #    after Hugo, before Sphinx.
+      - name: Generate Hugo objects.inv + nav.json
+        run: |
+          python scripts/hugo_json_to_objects_inv.py public/index.json hugo-objects.inv docs/_extra/nav.json
+
+      # 3) docs/ (general docs + nested requirements/ sphinx-needs section)
+      #    consumes hugo-objects.inv via intersphinx_mapping (docs/conf.py)
+      #    so `hugo:` cross-references resolve. Building straight into
+      #    public/docs/ ships both builds in a single Pages artifact under
+      #    one origin without a separate merge/copy step.
+      - name: Build docs (Sphinx) site
+        env:
+          HUGO_BASE_URL: ${{ steps.pages.outputs.base_url }}/
+        run: |
+          python -m sphinx -b html docs public/docs -W
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

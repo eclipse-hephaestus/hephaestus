@@ -1,0 +1,27 @@
+/* sphinx-needs styles its need boxes (need_core.css) and needtable controls
+   (needstable.css) via its own --sn-color-* custom properties, defined once
+   in :root with no dark-mode variant. Furo's dark mode only changes its own
+   --color-* tokens (e.g. text goes light), so the need box background stays
+   hardcoded light gray while the text turns light too - unreadable.
+   Re-point the relevant --sn-color-* variables at Furo's own dark palette
+   tokens under its two dark-mode selectors, so this tracks Furo's theme
+   automatically instead of hardcoding separate colors. */
+body[data-theme="dark"] {
+  --sn-color-need-bg: var(--color-background-secondary);
+  --sn-color-need-bg-head: rgba(255, 255, 255, 0.06);
+  --sn-color-need-border: var(--color-background-border);
+  --sn-color-bg-gray: var(--color-background-secondary);
+  --sn-color-bg-lightgray: var(--color-background-hover);
+  --sn-color-datatable-label: var(--color-foreground-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    --sn-color-need-bg: var(--color-background-secondary);
+    --sn-color-need-bg-head: rgba(255, 255, 255, 0.06);
+    --sn-color-need-border: var(--color-background-border);
+    --sn-color-bg-gray: var(--color-background-secondary);
+    --sn-color-bg-lightgray: var(--color-background-hover);
+    --sn-color-datatable-label: var(--color-foreground-primary);
+  }
+}

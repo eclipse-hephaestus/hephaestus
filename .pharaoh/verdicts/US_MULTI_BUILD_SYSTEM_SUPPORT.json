@@ -1,0 +1,34 @@
+{
+  "agent": "vscode-lm",
+  "axes": {
+    "naming_clarity": {
+      "reason": "The title and most of the body use confirmable stakeholder terms like \"Support for multi build systems\" and \"Contributors keep using their build and dependency tooling,\" but \"{need}`US_BAZEL_HARMONIZED_BUILD`\" is internal shorthand a non-implementer may not recognize.",
+      "score": 1,
+      "suggestion": "Replace \"{need}`US_BAZEL_HARMONIZED_BUILD`\" with a plain-language phrase (e.g., \"the harmonized Bazel build workflow\") or add an in-text explanation of what that reference means."
+    },
+    "no_mechanism_leak": {
+      "reason": "The body leaks implementation by explicitly naming the specific technology choice \"Cargo\" (and referencing \"US_BAZEL_HARMONIZED_BUILD\").",
+      "score": 0,
+      "suggestion": "Rewrite it in technology-neutral terms, e.g., \"Contributors can continue using their existing build and dependency workflows alongside the harmonized build approach.\""
+    },
+    "parent_fit": {
+      "reason": "Because the context explicitly states \"No parent needs,\" this need is treated as the root of the V and therefore fully meets parent fit by default.",
+      "score": 2
+    },
+    "single_user_capability": {
+      "reason": "It states a single user-facing capability—contributors can \"keep using their build and dependency tooling, such as Cargo, alongside {need}`US_BAZEL_HARMONIZED_BUILD`\"—which describes coexistence of tooling as one deliverable behavior.",
+      "score": 2
+    },
+    "user_observable": {
+      "reason": "The phrase \"Contributors keep using their build and dependency tooling, such as Cargo\" describes a user-visible capability, but tying it to \"alongside {need}`US_BAZEL_HARMONIZED_BUILD`\" relies on internal framing.",
+      "score": 1,
+      "suggestion": "Rewrite it as a directly testable user outcome, e.g., \"Contributors can run Cargo build/dependency commands in this project without losing support for the Bazel harmonized build workflow.\""
+    }
+  },
+  "criteria": "feat",
+  "criteria_fingerprint": "bb61c1a1cf63adcf67ee69adf932c3812909a595fa4b3037b66f097932231afe",
+  "model": "auto",
+  "need": "US_MULTI_BUILD_SYSTEM_SUPPORT",
+  "reviewed_fingerprint": "31833dd8178cacb43c3b1a35236b96b81b9aef1148c0f91336ce9e0843d6caaf",
+  "schema": 2
+}

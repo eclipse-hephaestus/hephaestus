@@ -1,0 +1,39 @@
+{{- /*
+  Site inventory: page list (for the Sphinx-side objects.inv generator) and
+  main nav (for the shared top-nav bar rendered on both Hugo and Sphinx pages).
+  See scripts/hugo_json_to_objects_inv.py and docs/_static/shared-nav.js.
+*/ -}}
+{{- $pages := slice -}}
+{{- $homePrefix := .Site.Home.RelPermalink -}}
+{{- range .Site.Pages -}}
+  {{- /* baseURL-independent identifier, stable across forks with a
+         different repo name/path segment (e.g. "getting-started/"
+         rather than "hephaestus/getting-started/") */ -}}
+  {{- $pages = $pages | append (dict
+    "title" .Title
+    "permalink" .Permalink
+    "relPermalink" .RelPermalink
+    "path" (strings.TrimPrefix $homePrefix .RelPermalink)
+    "section" .Section
+    "kind" .Kind
+  ) -}}
+{{- end -}}
+{{- $nav := slice -}}
+{{- range .Site.Menus.main -}}
+  {{- $nav = $nav | append (dict
+    "name" .Name
+    "url" (.URL | absURL)
+    "weight" .Weight
+  ) -}}
+{{- end -}}
+{{- dict
+  "site" (dict
+    "title" .Site.Title
+    "baseURL" .Site.BaseURL
+    "logo" .Site.Params.logo
+    "callToActionText" .Site.Params.call_for_action_text
+    "callToActionURL" (.Site.Params.call_for_action_url | absURL)
+  )
+  "nav" $nav
+  "pages" $pages
+| jsonify (dict "indent" "  ") -}}

@@ -1,0 +1,37 @@
+{
+  "agent": "vscode-lm",
+  "axes": {
+    "atomicity": {
+      "reason": "It states a single obligation — the harmonized build shall \"incorporate artifacts produced by a component's native build tooling\" into the overall output, with \"alongside Bazel-built components\" acting as context rather than a separate duty.",
+      "score": 2
+    },
+    "comprehensibility": {
+      "reason": "The statement is self-contained and intelligible because it clearly specifies that \"the harmonized build shall incorporate artifacts produced by a component's native build tooling\" \"into the overall build output alongside Bazel-built components\" without relying on unseen references.",
+      "score": 2
+    },
+    "feasibility": {
+      "reason": "The requirement is feasible because \"incorporate artifacts produced by a component's native build tooling\" \"alongside Bazel-built components\" describes a standard, implementable multi-build integration pattern with known tooling.",
+      "score": 2
+    },
+    "parent_fit": {
+      "reason": "It directly engages the parent obligation to support using native tooling alongside Bazel by requiring the harmonized build to \"incorporate artifacts produced by a component's native build tooling\" \"alongside Bazel-built components\".",
+      "score": 2
+    },
+    "unambiguity": {
+      "reason": "The statement is largely clear, but terms like \"artifacts\" and \"incorporate ... alongside Bazel-built components\" allow more than one reading about exactly what is included and how it is combined in the output.",
+      "score": 1,
+      "suggestion": "Specify the artifact types and integration method explicitly, e.g., \"The harmonized build shall copy each component’s native-built binaries and libraries into the same final output package as Bazel-built binaries and libraries.\""
+    },
+    "verifiability": {
+      "reason": "The statement is directionally testable via \"shall incorporate artifacts ... into the overall build output,\" but it does not define which artifacts, where they must appear, or the exact pass/fail condition.",
+      "score": 1,
+      "suggestion": "Specify a concrete acceptance test, e.g., \"When running build command X, for each native-built component Y, artifact files matching pattern Z must be present in output directory A together with Bazel artifacts, and the build fails if any expected file is missing.\""
+    }
+  },
+  "criteria": "requirement",
+  "criteria_fingerprint": "941b3ec6f6e1c2e4311154b93f3652b2180f8965a70193734339da329202a428",
+  "model": "auto",
+  "need": "REQ_NATIVE_TOOLING_OUTPUT_INTEGRATION",
+  "reviewed_fingerprint": "1b387f8a3f2919529504e083b995f392e3bc45e775eb26d3c2af15a3b7021e3f",
+  "schema": 2
+}

@@ -39,3 +39,11 @@ Delivers a ready-to-use, pre-configured development environment with no manual s
 
 Provides intelligent support across all layers: analyzes build/test/tooling outputs, suggests fixes and improvements, assists with configuration and workflow execution. Initial use case: automated dependency tree reasoning explaining why direct and transitive dependencies are included, useful for FOSS analysis.
 
+
+## Contribution proposals
+
+```{toctree}
+:maxdepth: 1
+
+contributions/s-core-sw-fabric
+```

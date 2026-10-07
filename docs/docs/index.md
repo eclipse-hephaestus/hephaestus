@@ -11,6 +11,14 @@ Hephaestus.
 - Validation workflows
 - Contributor guide
 
+## Documentation assistant proposal
+
+```{toctree}
+:maxdepth: 1
+
+contributions/s-core-docs-assistant
+```
+
 ## Architecture model
 
 hephaestus should document how individual tools connect across requirements,
